@@ -6,3 +6,13 @@ Jinja2
 MarkupSafe
 setuptools
 Werkzeug
+scipy
+pypdf
+langchain
+torch
+accelerate
+bitsandbytes
+ctransformers
+sentence_transformers
+faiss_cpu
+huggingface_hub
