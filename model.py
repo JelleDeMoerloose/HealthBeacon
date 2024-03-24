@@ -47,7 +47,7 @@ class MyChatBot:
     def load_llm(self):
         # Load the locally downloaded model here
         llm = CTransformers(
-            model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
+            model="model/llama-2-7b-chat.Q8_0.gguf",
             model_type="llama",
             max_new_tokens=512,
             temperature=0.5,
