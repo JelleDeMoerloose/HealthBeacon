@@ -1,11 +1,14 @@
 from flask import Flask, send_from_directory
-from api import patientAPI
+
+
+
+from api.patientsAPI import patientsAPI
 
 
 
 app = Flask(__name__)
 
-app.register_blueprint(patientAPI)
+app.register_blueprint(patientsAPI)
 
 
 @app.route('/')
