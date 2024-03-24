@@ -1,17 +1,45 @@
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 
+const urlParams = new URLSearchParams(window.location.search);
+let patientId =  urlParams.get('patientid');
+
+
 sendButton.addEventListener('click', function () {
-    const message = messageInput.value.trim();
+    let message = messageInput.value.trim();
     if (message !== '') {
-        createMessage("You", message);
-        document.getElementById("hiddenImage").hidden = false
-        sendMessage(message);
-        messageInput.value = ''; // Clear input field after sending
+
+        fetch(`/patients/id/${patientId}`).then(response=>response.json()).then(data=>{
+
+            delete data.id;
+            delete data.days_in_hospital
+
+            console.log(data)
+
+
+
+
+            createMessage("You", message);
+            document.getElementById("hiddenImage").hidden = false
+
+           
+    
+            //message = message + " IMPORTANT: " + JSON.stringify(data)
+            console.log(message)
+            sendMessage(message);
+            messageInput.value = ''; // Clear input field after sending
+
+
+
+        })
+ 
     }
 });
 
 function sendMessage(message) {
+
+
+
     fetch('/chat', {
         method: 'POST',
         headers: {

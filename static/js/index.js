@@ -1,6 +1,9 @@
 const textInput = document.getElementById('searchInput');
 const errorMessage = document.getElementById('errorMessage');
 
+const urlParams = new URLSearchParams(window.location.search);
+let patiendId =  urlParams.get('patientid');
+
 /*
 let patients = []
 
