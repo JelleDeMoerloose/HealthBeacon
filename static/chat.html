@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Title Here</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Chatbot Interface</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/chat.css">
 </head>
+
 <body>
-    <header>
-        <h1>Your Website Name</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="kader" class="container">
+        <div class="row">
 
-    <main>
-        <section>
-            <h2>Welcome to Our Website!</h2>
-            <p>This is a simple HTML5 template. Feel free to customize it according to your needs.</p>
-        </section>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Chatbot</h5>
+                    <!-- Sample chat messages -->
+                    <div class="card message bot-message ">
+                        <strong>Bot:</strong> Welcome to the Chatbot!
+                    </div>
+                    <div class="card message bot-message">
+                        <strong>Bot:</strong> How can I assist you today?
+                    </div>
+                    <div class="card message user-message">
+                        <strong>You:</strong> Hi there! I have a question.
+                    </div>
+                    <div class="card message bot-message">
+                        <strong>Bot:</strong> Sure, go ahead and ask.
+                    </div>
+                    <div class="card message user-message ">
+                        <strong>You:</strong> I need information about our products.
+                    </div>
+                    <div class="card message bot-message ">
+                        <strong>Bot:</strong> Here is some information about our products...
+                    </div>
+                    <!-- End of sample chat messages -->
+                    <div class="input-group ">
+                        <input type="text" class="form-control" placeholder="Type your message here...">
+                        <button class="btn btn-primary" type="button">Send</button>
+                    </div>
+                </div>
+            </div>
 
-        <section>
-            <h2>About Us</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.</p>
-        </section>
 
-        <section>
-            <h2>Our Services</h2>
-            <ul>
-                <li>Service 1</li>
-                <li>Service 2</li>
-                <li>Service 3</li>
-            </ul>
-        </section>
-    </main>
+        </div>
+        <!-- Emergency button -->
+        <div class="row justify-content-center">
+            <div class="col-md-4 row justify-content-center"> <button type="button"
+                    class="btn btn-danger ">Emergency</button></div>
 
-    <footer>
-        <p>&copy; 2024 Your Website Name. All Rights Reserved.</p>
-    </footer>
+        </div>
 
-    <script src="script.js"></script>
+    </div>
 </body>
+
 </html>
