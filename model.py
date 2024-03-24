@@ -73,8 +73,3 @@ class MyChatBot:
     def final_result(self, query):
         response = self.chain({"query": query})
         return response
-
-
-mybot = MyChatBot()
-response = mybot.final_result("Tell me a joke please ")
-print(response)

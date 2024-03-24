@@ -1,0 +1,142 @@
+[
+    {
+      "id": 1,
+      "contagious_disease": true,
+      "surgery_type": "Appendectomy",
+      "treatment_type": "Antibiotics",
+      "days_in_hospital": 5
+    },
+    {
+      "id": 2,
+      "contagious_disease": false,
+      "surgery_type": "Knee Replacement",
+      "treatment_type": "Physical Therapy",
+      "days_in_hospital": 3
+    },
+    {
+      "id": 3,
+      "contagious_disease": true,
+      "surgery_type": "Cataract Surgery",
+      "treatment_type": "Eye Drops",
+      "days_in_hospital": 1
+    },
+    {
+      "id": 4,
+      "contagious_disease": false,
+      "surgery_type": "Gallbladder Removal",
+      "treatment_type": "Pain Medication",
+      "days_in_hospital": 2
+    },
+    {
+      "id": 5,
+      "contagious_disease": false,
+      "surgery_type": "Hernia Repair",
+      "treatment_type": "Rest",
+      "days_in_hospital": 1
+    },
+    {
+      "id": 6,
+      "contagious_disease": true,
+      "surgery_type": "Hip Replacement",
+      "treatment_type": "Physical Therapy",
+      "days_in_hospital": 4
+    },
+    {
+      "id": 7,
+      "contagious_disease": false,
+      "surgery_type": "Tonsillectomy",
+      "treatment_type": "Antibiotics",
+      "days_in_hospital": 3
+    },
+    {
+      "id": 8,
+      "contagious_disease": true,
+      "surgery_type": "LASIK Eye Surgery",
+      "treatment_type": "Eye Drops",
+      "days_in_hospital": 1
+    },
+    {
+      "id": 9,
+      "contagious_disease": false,
+      "surgery_type": "Liposuction",
+      "treatment_type": "Compression Garments",
+      "days_in_hospital": 2
+    },
+    {
+      "id": 10,
+      "contagious_disease": false,
+      "surgery_type": "Colonoscopy",
+      "treatment_type": "Colonoscopy Prep",
+      "days_in_hospital": 1
+    },
+    {
+      "id": 11,
+      "contagious_disease": false,
+      "surgery_type": "Tubal Ligation",
+      "treatment_type": "Pain Medication",
+      "days_in_hospital": 1
+    },
+    {
+      "id": 12,
+      "contagious_disease": false,
+      "surgery_type": "Cesarean Section",
+      "treatment_type": "Pain Medication",
+      "days_in_hospital": 4
+    },
+    {
+      "id": 13,
+      "contagious_disease": true,
+      "surgery_type": "Coronary Artery Bypass",
+      "treatment_type": "Cardiac Rehabilitation",
+      "days_in_hospital": 7
+    },
+    {
+      "id": 14,
+      "contagious_disease": false,
+      "surgery_type": "Mastectomy",
+      "treatment_type": "Physical Therapy",
+      "days_in_hospital": 3
+    },
+    {
+      "id": 15,
+      "contagious_disease": true,
+      "surgery_type": "Lung Transplant",
+      "treatment_type": "Immunosuppressive Drugs",
+      "days_in_hospital": 10
+    },
+    {
+      "id": 16,
+      "contagious_disease": false,
+      "surgery_type": "Gastric Bypass",
+      "treatment_type": "Dietary Changes",
+      "days_in_hospital": 5
+    },
+    {
+      "id": 17,
+      "contagious_disease": true,
+      "surgery_type": "Liver Transplant",
+      "treatment_type": "Immunosuppressive Drugs",
+      "days_in_hospital": 8
+    },
+    {
+      "id": 18,
+      "contagious_disease": false,
+      "surgery_type": "Root Canal",
+      "treatment_type": "Root Canal Therapy",
+      "days_in_hospital": 1
+    },
+    {
+      "id": 19,
+      "contagious_disease": false,
+      "surgery_type": "Gastric Sleeve",
+      "treatment_type": "Dietary Changes",
+      "days_in_hospital": 3
+    },
+    {
+      "id": 20,
+      "contagious_disease": true,
+      "surgery_type": "Kidney Transplant",
+      "treatment_type": "Immunosuppressive Drugs",
+      "days_in_hospital": 7
+    }
+  ]
