@@ -5,6 +5,7 @@ sendButton.addEventListener('click', function () {
     const message = messageInput.value.trim();
     if (message !== '') {
         createMessage("You", message);
+        document.getElementById("hiddenImage").hidden = false
         sendMessage(message);
         messageInput.value = ''; // Clear input field after sending
     }
@@ -21,6 +22,7 @@ function sendMessage(message) {
         .then(response => response.json())
         .then(data => {
             // Create a new message card for the bot
+            document.getElementById("hiddenImage").hidden = true
             createMessage("bot", data.message);
         })
         .catch(error => console.error('Error:', error));

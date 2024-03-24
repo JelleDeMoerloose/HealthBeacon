@@ -15,16 +15,21 @@
         <div class="row">
 
             <div class="card">
-                <div class="card-body" id="chatbox">
-                    <h5 class="card-title text-primary">Chatbot</h5>
-                    <!-- Sample chat messages -->
-                    <div class="card message bot-message ">
-                        <strong>Bot:</strong> Welcome to the Chatbot!
+                <div class="card-body">
+                    <div id="chatbox">
+                        <h5 class="card-title text-primary">Chatbot</h5>
+                        <!-- Sample chat messages -->
+                        <div class="card message bot-message ">
+                            <strong>Bot:</strong> Welcome to the Chatbot!
+                        </div>
+                        <div class="card message bot-message">
+                            <strong>Bot:</strong> How can I assist you today?
+                        </div>
                     </div>
-                    <div class="card message bot-message">
-                        <strong>Bot:</strong> How can I assist you today?
-                    </div>
-
+                    <img src="/static/images/loading.gif" style="height: 100px; width: auto;" alt="loading"
+                        id="hiddenImage" hidden>
+                </div>
+                <div class="card-footer">
                     <!-- End of sample chat messages -->
                     <div class="input-group ">
                         <input id="messageInput" type="text" class="form-control"
@@ -32,6 +37,7 @@
                         <button class="btn btn-primary" type="button" id="sendButton">Send</button>
                     </div>
                 </div>
+
             </div>
 
 
