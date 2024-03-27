@@ -29,7 +29,7 @@ configureBtn.addEventListener('click', function() {
         if(/^[0-9]+$/.test(patientId)){
         
 
-        fetch(`http://localhost:5000/patients/id/${patientId}`).then(response => response.json()).then(data => {
+        fetch(`/patients/id/${patientId}`).then(response => response.json()).then(data => {
 
         
 

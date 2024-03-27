@@ -1,11 +1,13 @@
 from flask import Flask, send_from_directory
 from api.patientsAPI import patientsAPI
 from api.chatAPI import chatAPI
+from flask_cors import CORS
 
 # from api import patientAPI
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/chat")
