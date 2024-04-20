@@ -4,22 +4,29 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
-
+import os
 
 class MyChatBot:
 
-    def __init__(self):
+    def __init__(self, prompt_files=os.path.normpath(os.path.join(os.path.dirname(__file__), "data", "prompts", "default"))):
         # Initialize attributes to None
+
+        # Vectorstore database path for storing the embeddings of the hospital protocol
         self.DB_FAISS_PATH = "vectorstore/db_faiss"
-        self.custom_prompt_template = """Use the following pieces of information to answer the user's question.
-        If you don't know the answer, just say that you don't know, don't try to make up an answer. Look for a suiting protocol and find your answer. If it looks like the patient is in danger write "EMERGENCY" and nothing else.
 
-        Context: {context}
-        Question: {question}
+        # Custom prompt template for QA retrieval
+        system_prompt = open(os.path.join(prompt_files, "system_prompt.txt"), "r").read()        
+        user_message = open(os.path.join(prompt_files, "user_message.txt"), "r").read()
+        self.custom_prompt_template = """<s>[INST] <<SYS>>
+{system_prompt}
+<</SYS>>
 
-        Only return the helpful answer below and nothing else.
-        Helpful answer:
-        """
+{user_message} [/INST]""".format(
+            system_prompt=system_prompt,
+            user_message=user_message
+        )
+
+        # Load the QA model
         self.chain = self.qa_bot()
 
     def set_custom_prompt(self):

@@ -1,0 +1,5 @@
+Question: {question}
+Hospital protocol context: {context}
+
+Only return the helpful answer below and nothing else.
+Helpful answer:
