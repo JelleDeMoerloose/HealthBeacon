@@ -1,2 +1,3 @@
 /venv_healthbeacon
 model/*
+__pycache__/

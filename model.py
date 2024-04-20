@@ -40,6 +40,7 @@ class MyChatBot:
             retriever=db.as_retriever(search_kwargs={"k": 2}),
             return_source_documents=True,
             chain_type_kwargs={"prompt": prompt},
+            # verbose=True,
         )
         return qa_chain
 
@@ -51,6 +52,8 @@ class MyChatBot:
             model_type="llama",
             max_new_tokens=512,
             temperature=0.5,
+            n_gpu_layers=-1,
+            # verbose=True,
         )
         return llm
 
@@ -71,5 +74,5 @@ class MyChatBot:
 
     # output function
     def final_result(self, query):
-        response = self.chain({"query": query})
+        response = self.chain.invoke({"query": query})
         return response
