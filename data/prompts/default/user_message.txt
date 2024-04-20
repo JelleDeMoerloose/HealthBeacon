@@ -1,4 +1,4 @@
 Question: {question}
-Hospital protocol context: {context}
-
-JSON Answer:
+Context: {context}
+Output the answer in JSON with keys "simple_answer", "help" and "emergency".
+Output must include only valid JSON.
