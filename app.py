@@ -15,6 +15,11 @@ def chatbot():
     return send_from_directory("static", "chat.html")
 
 
+@app.route("/translate")
+def translator():
+    return send_from_directory("static", "translator.html")
+
+
 app.register_blueprint(patientsAPI)
 app.register_blueprint(chatAPI)
 
