@@ -6,6 +6,7 @@ from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
 import os
 
+
 class MyChatBot:
 
     def __init__(self, prompt_files=os.path.normpath(os.path.join(os.path.dirname(__file__), "data", "prompts", "default"))):
@@ -15,14 +16,21 @@ class MyChatBot:
         self.DB_FAISS_PATH = "vectorstore/db_faiss"
 
         # Custom prompt template for QA retrieval
-        system_prompt = open(os.path.join(prompt_files, "system_prompt.txt"), "r").read()        
-        user_message = open(os.path.join(prompt_files, "user_message.txt"), "r").read()
+        system_prompt = open(os.path.join(
+            prompt_files, "system_prompt.txt"), "r").read()
+        examples = open(os.path.join(prompt_files, "examples.txt"), "r").read()
+        user_message = open(os.path.join(
+            prompt_files, "user_message.txt"), "r").read()
         self.custom_prompt_template = """<s>[INST] <<SYS>>
 {system_prompt}
 <</SYS>>
 
-{user_message} [/INST]""".format(
+{examples}
+{user_message}
+[/INST]""".format(
             system_prompt=system_prompt,
+            # examples='<s>[INST]',
+            examples=examples,
             user_message=user_message
         )
 
@@ -54,14 +62,24 @@ class MyChatBot:
     # Loading the model
     def load_llm(self):
         # Load the locally downloaded model here
+
+        config = {
+            "max_new_tokens": 256,
+            "temperature": 0,
+            # "n_gpu_layers": -1,   # 'n_gpu_layers' is an invalid keyword argument for from_pretrained()
+            "context_length": 800,
+            # verbose:True,
+        }
+
         llm = CTransformers(
             model="model/llama-2-7b-chat.Q8_0.gguf",
             model_type="llama",
-            max_new_tokens=512,
-            temperature=0.5,
-            n_gpu_layers=-1,
-            # verbose=True,
+            config=config,
         )
+
+        # print(dir(llm))
+        # print(llm._identifying_params)
+
         return llm
 
     # QA Model Function
