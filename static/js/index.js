@@ -42,7 +42,7 @@ configureBtn.addEventListener('click', function() {
 
             searchInput.style.border = '1px solid green';
 
-        window.location.href = `/chat?patientid=${patientId}`;
+        window.location.href = `/chat.html?patientid=${patientId}`;
 
            
             console.log(data)
