@@ -1,0 +1,70 @@
+.background-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/Background_translator.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Keeps the background behind the other content */
+}
+
+.background-blur::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(246, 248, 250, 0.85); /* White color with opacity */
+    z-index: -1; /* Ensure it's also behind the content */
+}
+
+/* Styles for the text boxes */
+.form-control {
+    background-color: #fbfbfb; /* Light blue background */
+    border: 0; /* Removes borders */
+    box-shadow: 0 4px 8px rgba(173, 216, 230, 0.6);
+    border-radius: 4px; /* Rounds the corners */
+    color: black; /* Default text color */
+    padding: 10px; /* Adjust padding as needed */
+    margin-bottom: 15px; /* Space between boxes */
+}
+
+/* Focus styles for text boxes */
+.form-control:focus {
+    outline: none; /* Removes the outline on focus */
+    box-shadow: 0 0 0 0.2rem rgba(208, 229, 252, 0.25); /* Light blue glow on focus */
+}
+
+/* Placeholder styles */
+::placeholder {
+    color: lightgray; /* Color of placeholder text */
+    opacity: 1; /* Full opacity */
+}
+
+/* Styles when input/select has a value */
+.form-control:not(:placeholder-shown),
+.form-control:focus {
+    color: black; /* Text color when typing or focused */
+}
+
+select.form-control:not(:placeholder-shown) > option,
+select.form-control:focus > option {
+    color: black; /* Text color for options when selected or focused */
+}
+
+/* Card with no background and border */
+.card {
+    background: none;
+    border: none;
+}
+
+/* Centered title with dark blue color */
+#app-title {
+    color: rgb(3, 3, 78);
+    margin-bottom: 2rem; /* Add space below the title */
+}
+

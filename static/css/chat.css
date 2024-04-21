@@ -1,3 +1,138 @@
-body {
-    background-color: #f5f7f7;
+.background-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/Background_chatbot.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Keeps the background behind the other content */
 }
+
+.background-blur::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(246, 248, 250, 0.85); /* White color with opacity */
+    z-index: -1; /* Ensure it's also behind the content */
+}
+
+
+#app-title {
+    color: rgb(3, 3, 78);
+    margin-bottom: 2rem;
+}
+
+.bot-message {
+    background-color: #d0e7f3; /* Light blue for bot messages */
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.You-message {
+    background-color: #ffffff; /* White for user input */
+}
+
+/* Styles for the input and buttons */
+.input-group .form-control {
+    border: 0;
+    box-shadow: 0 4px 8px rgba(173, 216, 230, 0.6);
+}
+
+.input-group button {
+    box-shadow: 0 4px 8px rgba(173, 216, 230, 0.6);
+}
+
+.card {
+    background: none;
+    border: none;
+    position: relative; /* Needed to keep the card in the flow next to the chatbot image */
+    z-index: 1; /* Ensure the card is above the chatbot image */
+}
+
+/* Make sure the rest of the content aligns properly */
+.container, .row, .col-md-6, .col-md-6 .card {
+    position: relative; /* This ensures proper stacking context for z-index */
+}
+
+/* Ensure the row containing the chatbot image stretches the full height */
+.row {
+    /*min-height: 100vh; /* 100% of the viewport height */
+    margin: 0; /* Remove default margins if needed */
+    align-items: stretch; /* Stretch children to fill the height */
+}
+
+/* Chatbot image adjustments */
+.chatbot-image {
+    width: 100%; /* Full width of the container */
+    height: 80vh; /* Full viewport height */
+    object-fit: cover; /* Cover the full container, might crop the image */
+    position: absolute; /* Absolute position within the column */
+    top: 0; /* Start from the top of the viewport */
+    left: 0; /* Align to the left side of the column */
+    z-index: 0; /* Above the background */
+}
+
+
+/* Custom button class to adjust the width to match the input group */
+.btn-danger {
+    height: 40px; /* Smaller height for the emergency button */
+    width: 100%; /* This will make it as wide as the column */
+}
+
+.btn-custom-orange {
+    background-color: #ff8800; /* Your preferred shade of orange */
+    border-color: #ff8800; /* Adjust the border color as well */
+
+}
+
+.btn-custom-orange:hover {
+    background-color: #b55e07; /* A slightly darker shade of orange for hover */
+    border-color: #b05b07;
+}
+
+.custom-margin-top {
+    margin-top: 3rem; /* Adjust this value to move the button lower */
+}
+
+.info {
+    position: absolute;
+    top: 0; /* Align to the top of the container */
+    right: -95px; /* Align to the right of the container */
+    z-index: 2; /* Ensures it appears above the button */
+}
+
+.extra-info {
+    display: none;
+    position: absolute;
+    top: 100%; /* Places it directly below the info icon */
+    width: 400px;
+    right: 0; /* Align to the right side */
+    background-color: #fff; /* Background color for readability */
+    border: 1px solid #ccc; /* Border to define the tooltip */
+    border-radius: 5px; /* Rounded corners for the tooltip */
+    padding: 10px;
+    z-index: 3; /* Ensure it's above other content */
+
+    
+}
+
+.info:hover .extra-info {
+    display: block;
+}
+
+/* Consider adding transitions for smooth hover effects */
+* {
+  transition: all .2s ease;
+}
+
+

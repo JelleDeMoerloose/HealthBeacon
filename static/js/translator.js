@@ -4,8 +4,11 @@ let fromlanguage = document.getElementById("fromlanguage")
 let tolanguage = document.getElementById("tolanguage")
 let button = document.getElementById("translate")
 let clear_ = document.getElementById("clear")
+let returnChatbot_ = document.getElementById("returnChatbot")
+
 initiateCountries()
 clear_.addEventListener("click", clear)
+returnChatbot_.addEventListener("click", returnChatbot)
 button.addEventListener("click", function () {
     let text = input.value.trim()
     let from = fromlanguage.value
@@ -38,7 +41,19 @@ function translate(text, from, to) {
 function clear() {
     input.value = ""
     output.value = ""
+    input.placeholder = "Enter text to translate"
+    output.placeholder="Translated text will appear here"
 }
+
+function returnChatbot() {
+    var currentUrl = window.location.href; // Get the current URL
+    var urlParts = currentUrl.split('/'); // Split the URL into parts
+    urlParts[urlParts.length - 1] = 'chat.html'; // Replace the last part
+    var newUrl = urlParts.join('/'); // Rejoin the URL parts
+    window.location.href = newUrl; // Navigate to the new URL
+}
+
+
 function initiateCountries() {
     fetch("/patients/translate").then(response => {
         if (!response.ok) {

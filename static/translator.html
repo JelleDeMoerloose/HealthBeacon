@@ -1,47 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/static/images/favicon.png" type="image/x-icon">
-    <title>Healthbeacon</title>
+    <link rel="icon" href="./images/logo.png" type="image/x-icon">
+    <title>HealthBeacon Translator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/translator.css">
-    <script defer src="/static/js/translator.js"></script>
+    <link rel="stylesheet" href="./css/translator.css">
+    <script defer src="./js/translator.js"></script>
 </head>
 
 <body>
+    <div class="background-blur"></div>
     <div class="container">
+        <h1 class="text-center my-4" id="app-title">HealthBeacon Translator</h1> <!-- Centered title in dark blue -->
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">
-                        Translate App
-                    </div>
                     <div class="card-body">
-
-                        <div class="form-group">
-                            <label for="textInput">Enter text to translate:</label>
-                            <textarea class="form-control" id="textInput" rows="3"></textarea>
+                        <textarea class="form-control" id="textInput" rows="4" placeholder="Enter text to translate"></textarea>
+                        <select class="form-control" id="fromlanguage">
+                            <option value="" disabled selected>Select Language</option>
+                            <!-- Language options will be appended here by the initiateCountries function -->
+                        </select>
+                        <select class="form-control" id="tolanguage">
+                            <option value="" disabled selected>Translate To</option>
+                            <!-- Language options will be appended here by the initiateCountries function -->
+                        </select>
+                        <textarea class="form-control" id="textOutput" rows="4" readonly placeholder="Translated text will appear here"></textarea>
+                        <div class="text-center mt-4">
+                            <button type="button" class="btn btn-primary" id="translate">Translate</button>
+                            <button type="button" class="btn btn-danger" id="clear">Clear All</button>
+                            <button type="button" class="btn btn-info " id="returnChatbot">Return to chatbot</button>
                         </div>
-                        <div class="form-group">
-                            <label for="languageSelect">Select Language:</label>
-                            <select id="fromlanguage" class="form-control" id="languageSelect">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="languageSelect">Translate To:</label>
-                            <select id="tolanguage" class="form-control" id="languageSelect">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="output">Translated text:</label>
-                            <textarea class="form-control" id="textOutput" rows="3" readonly></textarea>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="translate">Translate</button>
-                        <button type="button" class="btn btn-danger" id="clear">Clear All</button>
-
                     </div>
                 </div>
             </div>
@@ -49,5 +41,4 @@
     </div>
 
 </body>
-
 </html>
