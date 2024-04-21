@@ -1,6 +1,9 @@
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 
+var url = new URL(window.location.href);
+var patientId = Number(url.searchParams.get('patientid'));
+
 sendButton.addEventListener('click', function () {
     const message = messageInput.value.trim();
     if (message !== '') {
@@ -12,12 +15,12 @@ sendButton.addEventListener('click', function () {
 });
 
 function sendMessage(message) {
-    fetch('/chat', {
+    fetch('/chat/v2', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ query: message })
+        body: JSON.stringify({ query: message, id: patientId })
     })
         .then(response => response.json())
         .then(data => {
