@@ -71,8 +71,8 @@ class MyChatBot:
         }
 
         llm = CTransformers(
-            model="model/llama-2-7b-chat.Q8_0.gguf",
-            # model="model/llama-2-7b-chat.Q5_K_M.gguf",
+            # model="model/llama-2-7b-chat.Q8_0.gguf",
+            model="model/llama-2-7b-chat.Q5_K_M.gguf", # faster, download from https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q5_K_M.gguf
             model_type="llama",
             config=config,
         )
@@ -100,5 +100,5 @@ class MyChatBot:
     # output function
     def final_result(self, query):
         response = self.chain.invoke({"query": query})
-        print(response)
+        # print(response)
         return response
