@@ -1,0 +1,4 @@
+Question: {question}
+Context: {context}
+Output the answer in JSON with keys "simple_answer", "help" and "emergency".
+Output must include only valid JSON.
