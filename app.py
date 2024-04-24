@@ -20,6 +20,11 @@ def chatbot():
 def nurse():
     return send_from_directory("static", "nurse.html")
 
+@app.route("/translate")
+def translator():
+    return send_from_directory("static", "translator.html")
+
+
 app.register_blueprint(patientsAPI)
 app.register_blueprint(chatAPI)
 app.register_blueprint(nurseAPI)
