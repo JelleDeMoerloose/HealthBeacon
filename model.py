@@ -72,7 +72,7 @@ class MyChatBot:
 
         llm = CTransformers(
             model="model/llama-2-7b-chat.Q8_0.gguf",
-            # model="model\llama-2-7b-chat.Q5_K_M.gguf",
+            # model="model/llama-2-7b-chat.Q5_K_M.gguf",
             model_type="llama",
             config=config,
         )
