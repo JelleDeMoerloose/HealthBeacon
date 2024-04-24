@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
-#from model import MyChatBot
+from model import MyChatBot
 from extensions import patients_db, nurse
 import requests
 
-#chatbot = MyChatBot()
+chatbot = MyChatBot()
 chatAPI = Blueprint("chatAPI", __name__, url_prefix="/chat")
 
 
@@ -48,9 +48,9 @@ def get_answerv2():
             #hier nog een select best suitable nurse
             nurse.notify(chatEl, id)
           
-            #antwoord = chatbot.final_result(data["query"])
-            #return jsonify({"message": antwoord["result"]})
-            return jsonify({"message": "ok"})
+            antwoord = chatbot.final_result(data["query"])
+            return jsonify({"message": antwoord["result"]})
+            # return jsonify({"message": "ok"})
     else:
         return jsonify({"error": "query and or id not present"}), 400
    
