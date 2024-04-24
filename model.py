@@ -18,17 +18,18 @@ class MyChatBot:
         # Custom prompt template for QA retrieval
         system_prompt = open(os.path.join(
             prompt_files, "system_prompt.txt"), "r").read()
-        # examples = open(os.path.join(prompt_files, "examples.txt"), "r").read()
+        examples = open(os.path.join(prompt_files, "examples.txt"), "r").read()
         user_message = open(os.path.join(
             prompt_files, "user_message.txt"), "r").read()
         self.custom_prompt_template = """<s>[INST] <<SYS>>
 {system_prompt}
 <</SYS>>
+{examples}
 {user_message}
 [/INST]""".format(
             system_prompt=system_prompt,
             # examples='<s>[INST]',
-            # examples=examples,
+            examples=examples,
             user_message=user_message
         )
 
@@ -65,12 +66,13 @@ class MyChatBot:
             "max_new_tokens": 256,
             "temperature": 0.2,
             # "n_gpu_layers": -1,   # 'n_gpu_layers' is an invalid keyword argument for from_pretrained()
-            "context_length": 800,
+            "context_length": 4096,
             # verbose:True,
         }
 
         llm = CTransformers(
             model="model/llama-2-7b-chat.Q8_0.gguf",
+            # model="model\llama-2-7b-chat.Q5_K_M.gguf",
             model_type="llama",
             config=config,
         )
@@ -98,4 +100,5 @@ class MyChatBot:
     # output function
     def final_result(self, query):
         response = self.chain.invoke({"query": query})
+        print(response)
         return response
