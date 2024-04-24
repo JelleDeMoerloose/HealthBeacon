@@ -4,9 +4,14 @@ let companion = document.getElementById("companion")
 let translator = document.getElementById("translator")
 let emergency = document.getElementById("emergency")
 
+
 companion.addEventListener("click", openCompanion)
 translator.addEventListener("click", openTranslator)
 //emergency.addEventListener("click", )
+
+var url = new URL(window.location.href);
+var patientId = Number(url.searchParams.get('patientid'));
+
 sendButton.addEventListener('click', function () {
     const message = messageInput.value.trim();
     if (message !== '') {
@@ -18,12 +23,12 @@ sendButton.addEventListener('click', function () {
 });
 
 function sendMessage(message) {
-    fetch('/chat', {
+    fetch('/chat/v2', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ query: message })
+        body: JSON.stringify({ query: message, id: patientId })
     })
         .then(response => response.json())
         .then(data => {
