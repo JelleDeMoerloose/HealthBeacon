@@ -14,6 +14,25 @@ class ITranslator(ABC):
 
 class TranslatorV1(ITranslator):
 
+    def translate(self, input: str, language: str) -> str:
+        url = f"https://api.mymemory.translated.net/get?q={input}&langpair={language}"
+        try:
+            # Make a GET request
+            response = requests.get(url)
+            # Check if the request was successful (status code 200)
+            if response.status_code == 200:
+                # Parse the JSON response into a Python dictionary
+                data = response.json()
+                print(data["responseData"]["translatedText"])
+                return data["responseData"]["translatedText"]
+            else:
+                # Return None if the request was unsuccessful
+                raise NameError(f"Translate API responded with:{response.status_code}")
+        except Exception as e:
+            # Print any exception that occurs
+            print("Error:", e)
+            raise
+
     def all_languages(self) -> dict[str, str]:
         countries = {
             "am-ET": "Amharic",
@@ -115,22 +134,3 @@ class TranslatorV1(ITranslator):
             "zu-ZA": "Zulu",
         }
         return countries
-
-    def translate(self, input: str, language: str) -> str:
-        url = f"https://api.mymemory.translated.net/get?q={input}&langpair={language}"
-        try:
-            # Make a GET request
-            response = requests.get(url)
-            # Check if the request was successful (status code 200)
-            if response.status_code == 200:
-                # Parse the JSON response into a Python dictionary
-                data = response.json()
-                print(data["responseData"]["translatedText"])
-                return data["responseData"]["translatedText"]
-            else:
-                # Return None if the request was unsuccessful
-                raise NameError(f"Translate API responded with:{response.status_code}")
-        except Exception as e:
-            # Print any exception that occurs
-            print("Error:", e)
-            raise

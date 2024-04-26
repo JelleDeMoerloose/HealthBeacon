@@ -1,6 +1,3 @@
-from logic.chatmessage import ChatElement
-
-
 class Patient:
     def __init__(
         self,

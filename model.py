@@ -4,10 +4,18 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
+from logic.patient import Patient
+from abc import ABC, abstractmethod
 import os
 
 
-class MyChatBot:
+class IChatBot(ABC):
+    @abstractmethod
+    def final_result(self, query: str, patient_as_context: Patient) -> dict[str, str]:
+        pass
+
+
+class ChatBotV1(IChatBot):
 
     def __init__(
         self,
@@ -103,7 +111,10 @@ class MyChatBot:
         return qa
 
     # output function
-    def final_result(self, query):
+    def final_result(self, query: str, patient: Patient) -> dict[str, str]:
+        # we must use the context of the patien !!! NOT IMPLEMENTED YET
+        context: str = str(patient)
+
         response = self.chain.invoke({"query": query})
         # print(response)
         return response

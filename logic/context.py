@@ -54,6 +54,10 @@ class HardcodedContext(IContext):
         with open(self.DATA_PATH, "r") as f:
             data = json.load(f)
 
+        # making ten hardcoded nurses
+        for i in range(10):
+            self.nurses_dict[i] = Nurse(i)
+
         for item in data:
             patient = Patient(
                 item["id"],
@@ -73,6 +77,7 @@ class HardcodedContext(IContext):
 
     def get_patient_by(self, patient_id: int) -> Patient:
         if patient_id in self.patient_dict:
+            # error messages is not valid --> we already checked if NONE
             return self.patient_dict.get(patient_id)
         else:
             raise NameError(f"Patient with id {patient_id} not found!")
@@ -82,6 +87,7 @@ class HardcodedContext(IContext):
 
     def get_nurse_by(self, id: int) -> Nurse:
         if id in self.nurses_dict:
+            # error messages is not valid --> we already checked if NONE
             return self.nurses_dict.get(id)
         else:
             raise NameError(f"NursePatient with id {id} not found!")
