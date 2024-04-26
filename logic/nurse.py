@@ -1,16 +1,16 @@
 class Nurse:
-    def __init__(self, id):
+    def __init__(self, id: int):
         self.id = id
         self.notifications = {}
-        self.get_status = False
+        self.get_status: bool = False
         self.latest = []
-    
+
     def notify(self, chatEl, id):
         self.get_status = True
         if id not in self.notifications:
             self.notifications[id] = []
         self.notifications[id].append(chatEl)
-        
+
         self.latest = [chatEl, id]
 
     def get_latest(self):
@@ -23,5 +23,3 @@ class Nurse:
             serialized_chats = [chat.serialize() for chat in chats]
             serialized_notifications[id] = serialized_chats
         return serialized_notifications
-       
-        

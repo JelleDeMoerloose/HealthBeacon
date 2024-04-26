@@ -5,7 +5,7 @@ let translator = document.getElementById("translator")
 let emergency = document.getElementById("emergency")
 
 
-companion.addEventListener("click", openCompanion)
+//companion.addEventListener("click", openCompanion)
 translator.addEventListener("click", openTranslator)
 //emergency.addEventListener("click", )
 
@@ -44,7 +44,7 @@ function createMessage(sender, message) {
     const botMessageCard = document.createElement('div');
     botMessageCard.classList.add('message', `${sender}-message`);
     const botMessageContent = document.createElement('div');
-    
+
     botMessageContent.innerHTML = `<strong>${sender}:</strong> ${message}`;
 
     botMessageCard.appendChild(botMessageContent);
@@ -62,7 +62,7 @@ function openCompanion() {
 function openTranslator() {
     var currentUrl = window.location.href; // Get the current URL
     var urlParts = currentUrl.split('/'); // Split the URL into parts
-    urlParts[urlParts.length - 1] = 'translator.html'; // Replace the last part
+    urlParts[urlParts.length - 1] = 'translate'; // Replace the last part
     var newUrl = urlParts.join('/'); // Rejoin the URL parts
     window.location.href = newUrl; // Navigate to the new URL
 }

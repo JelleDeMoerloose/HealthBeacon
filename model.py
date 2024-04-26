@@ -9,18 +9,23 @@ import os
 
 class MyChatBot:
 
-    def __init__(self, prompt_files=os.path.normpath(os.path.join(os.path.dirname(__file__), "data", "prompts", "default"))):
+    def __init__(
+        self,
+        prompt_files=os.path.normpath(
+            os.path.join(os.path.dirname(__file__), "data", "prompts", "default")
+        ),
+    ):
         # Initialize attributes to None
 
         # Vectorstore database path for storing the embeddings of the hospital protocol
         self.DB_FAISS_PATH = "vectorstore/db_faiss"
 
         # Custom prompt template for QA retrieval
-        system_prompt = open(os.path.join(
-            prompt_files, "system_prompt.txt"), "r").read()
+        system_prompt = open(
+            os.path.join(prompt_files, "system_prompt.txt"), "r"
+        ).read()
         examples = open(os.path.join(prompt_files, "examples.txt"), "r").read()
-        user_message = open(os.path.join(
-            prompt_files, "user_message.txt"), "r").read()
+        user_message = open(os.path.join(prompt_files, "user_message.txt"), "r").read()
         self.custom_prompt_template = """<s>[INST] <<SYS>>
 {system_prompt}
 <</SYS>>
@@ -30,7 +35,7 @@ class MyChatBot:
             system_prompt=system_prompt,
             # examples='<s>[INST]',
             examples=examples,
-            user_message=user_message
+            user_message=user_message,
         )
 
         # Load the QA model
@@ -72,7 +77,7 @@ class MyChatBot:
 
         llm = CTransformers(
             # model="model/llama-2-7b-chat.Q8_0.gguf",
-            model="model/llama-2-7b-chat.Q5_K_M.gguf", # faster, download from https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q5_K_M.gguf
+            model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
             model_type="llama",
             config=config,
         )
