@@ -84,8 +84,8 @@ class ChatBotV1(IChatBot):
         }
 
         llm = CTransformers(
-            # model="model/llama-2-7b-chat.Q8_0.gguf",
-            model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
+            model="model/llama-2-7b-chat.Q8_0.gguf",
+            # model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
             model_type="llama",
             config=config,
         )

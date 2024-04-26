@@ -37,6 +37,7 @@ def index():
     return send_from_directory("static", "index.html")
 
 
+"""
 @socketio.on("connect", namespace="/websocket")  # Specify the namespace
 def handle_connect():
     nurse_id = request.args.get("nurse_id")
@@ -60,7 +61,7 @@ def send_notification(nurse_id, message):
             room=nurse_sockets[nurse_id],
             namespace="/websocket",
         )  # Specify the namespace
-
+"""
 
 if __name__ == "__main__":
 
