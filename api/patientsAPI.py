@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from translator import ITranslator, TranslatorV1
+from logic.translator import ITranslator, TranslatorV1
 
 import json
 from extensions import patients_db
@@ -14,17 +14,17 @@ translator: ITranslator = TranslatorV1()
 
 @patientsAPI.route("/all")
 def read_json_file():
-    patients = patients_db.get_patients()
+    patients = patients_db.get_all_patients()
     return jsonify([e.serialize() for e in patients])
 
 
 @patientsAPI.route("/id/<int:id>")
 def get_patient_by_id(id):
-    patient = patients_db.get_patient_by_id(id)
-    if patient is None:
-        return jsonify({'error': 'Patient not found'}), 404
-    else:
+    try:
+        patient = patients_db.get_patient_by(id)
         return jsonify(patient.serialize()), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
 
 
 @patientsAPI.route("/translate", methods=["GET"])
@@ -47,27 +47,20 @@ def translate():
     else:
         return jsonify({"error": "No JSON data received"}), 400
 
-    
 
-@patientsAPI.route('/chat/id/<int:id>/all')
+@patientsAPI.route("/chat/id/<int:id>/all")
 def get_chathistory_by_patientid(id):
-    patient = patients_db.get_patient_by_id(id)
-    chat = patient.get_chat_history()
-
-    if patient is None:
-        return jsonify({'error': 'Patient not found'}), 404
+    chat = patients_db.get_chat_history_patient(id)
+    if len(chat) == 0:
+        return jsonify({"error": "No history for that patient found"}), 404
     else:
         return jsonify([e.serialize() for e in chat])
 
-   
-@patientsAPI.route('/chat/id/<int:id>/latest')
+
+@patientsAPI.route("/chat/id/<int:id>/latest")
 def get_chat_by_patientid(id):
-    patient = patients_db.get_patient_by_id(id)
-    
-
-    if patient is None:
-        return jsonify({'error': 'Patient not found'}), 404
+    chat = patients_db.get_chat_history_patient(id)
+    if len(chat) == 0:
+        return jsonify({"error": "No history for that patient found"}), 404
     else:
-        chat = patient.get_latest_chat()
-        return jsonify(chat.serialize())
-
+        return jsonify(chat[-1].serialize())
