@@ -23,7 +23,10 @@ class Coordinator:
 
     def question_asked(self, query: str, id: int) -> str:
 
-        patient: Patient = self.context.get_patient_by(id)
+        patient: Patient | None = self.context.get_patient_by(id)
+        if patient is None:
+            raise NameError(f"Patient with id {id} does not exist")
+
         nurse: Nurse = self.nurse_selector.select_nurse(id)
         print(f"Nurse with id {nurse.id} choosen to handle request")
         chat: ChatMessage = ChatMessage(query, id, nurse.id)  # timestamp is default
@@ -37,3 +40,9 @@ class Coordinator:
 
     def translate_to(self, message: str, lang_to_lang: str):
         return self.translator.translate(message, lang_to_lang)
+
+    def patient_exists_by(self, id: int) -> bool:
+        patient: Patient | None = self.context.get_patient_by(id)
+        if patient:
+            return True
+        return False

@@ -16,25 +16,22 @@ configureBtn.addEventListener('click', function () {
 
         if (/^[0-9]+$/.test(patientId)) {
 
+            fetch(`/patients/id/${patientId}`).then(response => {
 
-            fetch(`/patients/id/${patientId}`).then(response => response.json()).then(data => {
-
-
-
-                if (data.error && data.error === 'Patient not found') {
-
+                if (!response.ok) {
+                    throw Error("network response was not ok ")
+                }
+                return response.json()
+            }).then(response => {
+                if (!response.exists) {
                     console.log("patient not found");
                     searchInput.style.border = '1px solid red';
                     errorMessage.textContent = `Patient ID ${patientId} doesn't exist`
                 } else {
                     searchInput.style.border = '1px solid green';
                     window.location.href = `/chat?patientid=${patientId}`;
-                    console.log(data)
                 }
-
-
-            })
-
+            }).catch(err => { console.error(err.message) })
 
         }
         else {

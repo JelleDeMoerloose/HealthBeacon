@@ -47,3 +47,12 @@ def translate():
 
     else:
         return jsonify({"error": "No JSON data received"}), 400
+
+
+@patientsAPI.route("/id/<int:id>")
+def patient_exists_with(id):
+
+    if coordinator.patient_exists_by(id):
+        return jsonify({"exists": True}), 200
+    else:
+        return jsonify({"exists": False}), 200

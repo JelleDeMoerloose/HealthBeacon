@@ -23,7 +23,7 @@ sendButton.addEventListener('click', function () {
 });
 
 function sendMessage(message) {
-    fetch('/chat/v2', {
+    fetch('/patients/chat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

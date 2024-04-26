@@ -16,7 +16,7 @@ class IContext(ABC):
         pass
 
     @abstractmethod
-    def get_patient_by(self, id: int) -> Patient:
+    def get_patient_by(self, id: int) -> Patient | None:
         pass
 
     @abstractmethod
@@ -24,7 +24,7 @@ class IContext(ABC):
         pass
 
     @abstractmethod
-    def get_nurse_by(self, id: int) -> Nurse:
+    def get_nurse_by(self, id: int) -> Nurse | None:
         pass
 
     @abstractmethod
@@ -75,22 +75,15 @@ class HardcodedContext(IContext):
         if patient_id in self.patient_dict:
             del self.patient_dict[patient_id]
 
-    def get_patient_by(self, patient_id: int) -> Patient:
-        if patient_id in self.patient_dict:
-            # error messages is not valid --> we already checked if NONE
-            return self.patient_dict.get(patient_id)
-        else:
-            raise NameError(f"Patient with id {patient_id} not found!")
+    def get_patient_by(self, patient_id: int) -> Patient | None:
+
+        return self.patient_dict.get(patient_id)
 
     def get_all_patients(self):
         return list(self.patient_dict.values())
 
-    def get_nurse_by(self, id: int) -> Nurse:
-        if id in self.nurses_dict:
-            # error messages is not valid --> we already checked if NONE
-            return self.nurses_dict.get(id)
-        else:
-            raise NameError(f"NursePatient with id {id} not found!")
+    def get_nurse_by(self, id: int) -> Nurse | None:
+        return self.nurses_dict.get(id)
 
     def get_all_nurses(self) -> list[Nurse]:
         return list(self.nurses_dict.values())
