@@ -1,6 +1,7 @@
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 let returnChatbot_ = document.getElementById("returnChatbot")
+let homescreen = document.getElementById("homescreen")
 
 returnChatbot_.addEventListener("click", returnChatbot)
 sendButton.addEventListener('click', function () {
@@ -20,6 +21,14 @@ function returnChatbot() {
     var newUrl = urlParts.join('/'); // Rejoin the URL parts
     window.location.href = newUrl; // Navigate to the new URL
 }
+
+homescreen.addEventListener("click", function() {
+    var currentUrl = window.location.href; // Get the current URL
+    var urlParts = currentUrl.split('/'); // Split the URL into parts
+    urlParts[urlParts.length - 1] = 'homescreen.html'; // Replace the last part
+    var newUrl = urlParts.join('/'); // Rejoin the URL parts
+    window.location.href = newUrl; // Navigate to the new URL
+});
 
 function sendMessage(message) {
     fetch('/chat', {

@@ -1,12 +1,11 @@
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 let companion = document.getElementById("companion")
-let translator = document.getElementById("translator")
 let emergency = document.getElementById("emergency")
+let homescreen = document.getElementById("homescreen")
 
 
 companion.addEventListener("click", openCompanion)
-translator.addEventListener("click", openTranslator)
 //emergency.addEventListener("click", )
 
 var url = new URL(window.location.href);
@@ -20,6 +19,14 @@ sendButton.addEventListener('click', function () {
         sendMessage(message);
         messageInput.value = ''; // Clear input field after sending
     }
+});
+
+homescreen.addEventListener("click", function() {
+    var currentUrl = window.location.href; // Get the current URL
+    var urlParts = currentUrl.split('/'); // Split the URL into parts
+    urlParts[urlParts.length - 1] = 'homescreen.html'; // Replace the last part
+    var newUrl = urlParts.join('/'); // Rejoin the URL parts
+    window.location.href = newUrl; // Navigate to the new URL
 });
 
 function sendMessage(message) {
