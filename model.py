@@ -37,7 +37,9 @@ class ChatBotV1(IChatBot):
         self.custom_prompt_template = """<s>[INST] <<SYS>>
 {system_prompt}
 <</SYS>>
+Example questions:
 {examples}
+User message:
 {user_message}
 [/INST]""".format(
             system_prompt=system_prompt,
