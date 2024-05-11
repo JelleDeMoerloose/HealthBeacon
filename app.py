@@ -37,11 +37,7 @@ def nurse():
     return send_from_directory("static", "nurse.html")
 
 
-<<<<<<< HEAD
 @app.route("/translator")
-=======
-@app.route("/translate")
->>>>>>> main
 def translator():
     return send_from_directory("static", "translator.html")
 
