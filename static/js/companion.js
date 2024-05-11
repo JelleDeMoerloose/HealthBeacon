@@ -2,7 +2,8 @@ const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 let returnChatbot_ = document.getElementById("returnChatbot")
 let homescreen = document.getElementById("homescreen")
-
+var url = new URL(window.location.href);
+var patientId = Number(url.searchParams.get('patientid'));
 returnChatbot_.addEventListener("click", returnChatbot)
 sendButton.addEventListener('click', function () {
     const message = messageInput.value.trim();
@@ -15,20 +16,19 @@ sendButton.addEventListener('click', function () {
 });
 
 function returnChatbot() {
-    var currentUrl = window.location.href; // Get the current URL
-    var urlParts = currentUrl.split('/'); // Split the URL into parts
-    urlParts[urlParts.length - 1] = 'chat.html'; // Replace the last part
-    var newUrl = urlParts.join('/'); // Rejoin the URL parts
-    window.location.href = newUrl; // Navigate to the new URL
+    navigateTo("home")
 }
 
-homescreen.addEventListener("click", function() {
-    var currentUrl = window.location.href; // Get the current URL
-    var urlParts = currentUrl.split('/'); // Split the URL into parts
-    urlParts[urlParts.length - 1] = 'homescreen.html'; // Replace the last part
-    var newUrl = urlParts.join('/'); // Rejoin the URL parts
-    window.location.href = newUrl; // Navigate to the new URL
+homescreen.addEventListener("click", function () {
+    navigateTo("chat")
 });
+function navigateTo(link) {
+    var currentUrl = window.location.href;
+    var urlParts = currentUrl.split('/');
+    urlParts[urlParts.length - 1] = link;
+    var newUrl = urlParts.join('/');
+    window.location.href = newUrl + `?patientid=${patientId}`;
+}
 
 function sendMessage(message) {
     fetch('/chat', {
@@ -52,7 +52,7 @@ function createMessage(sender, message) {
     const botMessageCard = document.createElement('div');
     botMessageCard.classList.add('message', `${sender}-message`);
     const botMessageContent = document.createElement('div');
-    
+
     botMessageContent.innerHTML = `<strong>${sender}:</strong> ${message}`;
 
     botMessageCard.appendChild(botMessageContent);

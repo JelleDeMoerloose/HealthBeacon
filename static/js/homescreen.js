@@ -11,7 +11,10 @@ let modaltext = document.getElementById("modaltext")
 let modal = document.getElementById("MyModal")
 var url = new URL(window.location.href);
 var patientId = Number(url.searchParams.get('patientid'));
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", rescale);
+window.addEventListener("resize", rescale)
+
+function rescale() {
     var buttons = document.querySelectorAll('.button.sidebutton');
     buttons.forEach(function (button) {
         var label = button.querySelector('.labelbutton');
@@ -29,20 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
             paddingPercentage = (buttonWidth - labelWidth - imageWidth) / (buttonWidth);
 
             // Set the padding-left dynamically
-            label.style.paddingLeft = (paddingPercentage * 100) + '%';
+            info.style.marginLeft = (paddingPercentage * 100 - 4) + '%';
         }
+    })
+}
 
-    });
-});
-bathroom.addEventListener("click", function () {
-    openPopup();
-    sendMessage('I need to go to the bathroom.');
-});
 
-fooddrink.addEventListener("click", function () {
-    openPopup();
-    sendMessage('I want something to eat or to drink.');
-});
 
 schedule.addEventListener("click", openSchedule);
 chatbot.addEventListener("click", openChatbot);
@@ -58,7 +53,7 @@ function navigateTo(link) {
     window.location.href = newUrl + `?patientid=${patientId}`;
 }
 function openSchedule() {
-    navigateTo("schedule.html")
+    navigateTo("schedule")
 }
 
 function openChatbot() {

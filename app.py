@@ -19,6 +19,16 @@ def chatbot():
     return send_from_directory("static", "chat.html")
 
 
+@app.route("/companion")
+def companion():
+    return send_from_directory("static", "companion.html")
+
+
+@app.route("/schedule")
+def schedule():
+    return send_from_directory("static", "schedule.html")
+
+
 @app.route("/nurse")
 def nurse():
     return send_from_directory("static", "nurse.html")

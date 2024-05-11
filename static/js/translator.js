@@ -5,7 +5,8 @@ let tolanguage = document.getElementById("tolanguage")
 let button = document.getElementById("translate")
 let clear_ = document.getElementById("clear")
 let homescreen = document.getElementById("homescreen")
-
+var url = new URL(window.location.href);
+var patientId = Number(url.searchParams.get('patientid'));
 initiateCountries()
 clear_.addEventListener("click", clear)
 button.addEventListener("click", function () {
@@ -15,13 +16,17 @@ button.addEventListener("click", function () {
     translate(text, from, to)
 })
 
-homescreen.addEventListener("click", function() {
-    var currentUrl = window.location.href; // Get the current URL
-    var urlParts = currentUrl.split('/'); // Split the URL into parts
-    urlParts[urlParts.length - 1] = 'homescreen.html'; // Replace the last part
-    var newUrl = urlParts.join('/'); // Rejoin the URL parts
-    window.location.href = newUrl; // Navigate to the new URL
+homescreen.addEventListener("click", function () {
+    navigateTo("home")
 });
+
+function navigateTo(link) {
+    var currentUrl = window.location.href;
+    var urlParts = currentUrl.split('/');
+    urlParts[urlParts.length - 1] = link;
+    var newUrl = urlParts.join('/');
+    window.location.href = newUrl + `?patientid=${patientId}`;
+}
 
 function translate(text, from, to) {
 
@@ -49,7 +54,7 @@ function clear() {
     input.value = ""
     output.value = ""
     input.placeholder = "Enter text to translate"
-    output.placeholder="Translated text will appear here"
+    output.placeholder = "Translated text will appear here"
 }
 
 function returnChatbot() {

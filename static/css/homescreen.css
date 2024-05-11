@@ -111,6 +111,7 @@ button:focus {
     font-size: 20px;
     line-height: 1em;
     height: 130px;
+    width: 90%;
     max-width: 100%;
     min-width: 140px;
     padding: 19px 24px;
@@ -141,7 +142,7 @@ button:focus {
 }
 
 .labelbutton {
-    padding-left: 12%;
+    padding-left: 40%;
 
 }
 
@@ -174,7 +175,6 @@ button:focus {
     width: auto;
     max-width: 100%;
     max-height: 100%;
-    padding-left: 40%;
 }
 
 .buttonred:hover {
