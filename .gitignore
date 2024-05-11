@@ -1,3 +1,6 @@
 /venv_healthbeacon
 model/*
 __pycache__/
+/.venv_healthbeacon
+HealtBeacon
+__pycache__

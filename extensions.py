@@ -1,12 +1,12 @@
-from logic.patients_db import Patients_db
-from logic.nurse import Nurse
+from logic.context import IContext, HardcodedContext
+from logic.nurse_select import INurseSelect, HardcodedNurseSelect
+from model import IChatBot, ChatBotV1
+from logic.coordinator import Coordinator
+from logic.translator import ITranslator, TranslatorV1
 
-
-patients_db = Patients_db()
-patients_db.initializer()
-
-patient = patients_db.get_patient_by_id(1)
-
-
-
-nurse = Nurse(1)
+# all objects and dependency injections
+database: IContext = HardcodedContext()
+nurse_selector: INurseSelect = HardcodedNurseSelect(database)
+chatbot: IChatBot = ChatBotV1()
+translator: ITranslator = TranslatorV1()
+coordinator: Coordinator = Coordinator(database, chatbot, nurse_selector, translator)
