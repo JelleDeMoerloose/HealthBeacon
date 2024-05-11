@@ -12,6 +12,7 @@ CORS(app)
 # Dictionary to store nurse IDs and corresponding sockets
 nurse_sockets = {}
 
+
 @app.route("/home")
 def home():
     return send_from_directory("static", "homescreen.html")
@@ -51,7 +52,7 @@ def index():
     return send_from_directory("static", "index.html")
 
 
-<<<<<<< HEAD
+"""
 @app.route("/notify", methods=["POST"])
 def handle_new_question():
     data = request.json
@@ -61,8 +62,8 @@ def handle_new_question():
 
         socketio.emit("new_question", data["question"])
     return jsonify({"message": "succesfully notified a nurse"})
-=======
-"""
+
+
 @socketio.on("connect", namespace="/websocket")  # Specify the namespace
 def handle_connect():
     nurse_id = request.args.get("nurse_id")
@@ -75,7 +76,7 @@ def handle_disconnect():
     nurse_id = request.args.get("nurse_id")
     del nurse_sockets[nurse_id]
     print(f"Nurse {nurse_id} disconnected")
->>>>>>> main
+
 
 
 # Example event for sending notifications
@@ -90,9 +91,4 @@ def send_notification(nurse_id, message):
 """
 
 if __name__ == "__main__":
-
-<<<<<<< HEAD
-    app.run(debug=True)
-=======
     socketio.run(app, use_reloader=True, log_output=True)
->>>>>>> main

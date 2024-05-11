@@ -14,12 +14,9 @@ class IChatBot(ABC):
     def final_result(self, query: str, patient_as_context: Patient) -> dict[str, str]:
         pass
 
-<<<<<<< HEAD
-=======
 
 class ChatBotV1(IChatBot):
 
->>>>>>> main
     def __init__(
         self,
         prompt_files=os.path.normpath(
