@@ -6,6 +6,9 @@ let companion = document.getElementById("companionBtn")
 let translator = document.getElementById("translatorBtn")
 let emergency = document.getElementById("emergencyBtn")
 let popup = document.getElementById("popup");
+let modaltitle = document.getElementById("modaltitle")
+let modaltext = document.getElementById("modaltext")
+let modal = document.getElementById("MyModal")
 var url = new URL(window.location.href);
 var patientId = Number(url.searchParams.get('patientid'));
 document.addEventListener("DOMContentLoaded", function () {
@@ -98,37 +101,37 @@ function sendMessage(message) {
 
 
 function showExplanation(buttonId, title, explanation) {
-    var button = document.getElementById(buttonId);
-    button.innerText = explanation; // Set button text to explanation
-    button.style.fontSize = "smaller"; // Make the text smaller
-    // Clear any existing timeout to prevent overlapping timeouts
-    clearTimeout(button.timeout);
-    button.timeout = setTimeout(function () {
-        button.innerText = title; // Reset button text after 4 seconds
-        button.style.fontSize = ""; // Reset font size
-    }, 4000);
+    modaltitle.innerText = title
+    modaltext.innerText = explanation; // Set button text to explanation
+    var myModal = new bootstrap.Modal(modal);
+    myModal.show();
 }
 
 
 // Attach hover event listeners to each button
-document.getElementById("bathroomBtnInfo").addEventListener("click", function () {
+document.getElementById("bathroomBtnInfo").addEventListener("click", function (event) {
+    event.stopPropagation()
     showExplanation("bathroomBtn", "Bathroom", "Push this button if you need to go to the bathroom. The nursing staff will be informed and they'll come to help you out.");
 });
 
-document.getElementById("fooddrinkBtnInfo").addEventListener("click", function () {
+document.getElementById("fooddrinkBtnInfo").addEventListener("click", function (event) {
+    event.stopPropagation()
     showExplanation("fooddrinkBtn", "Food or Drinks", "Push this button if you are hungry or thirsty. The nursing staff will be informed and they'll come to help you out.");
 });
 
-document.getElementById("scheduleBtnInfo").addEventListener("click", function () {
+document.getElementById("scheduleBtnInfo").addEventListener("click", function (event) {
+    event.stopPropagation()
     showExplanation("scheduleBtn", "Day Schedule", "Push this button if you want to know your schedule of today.");
 });
 
 
 
-document.getElementById("companionBtnInfo").addEventListener("click", function () {
+document.getElementById("companionBtnInfo").addEventListener("click", function (event) {
+    event.stopPropagation()
     showExplanation("companionBtn", "Companion", "Push this button if you want to go to the companion chatbot.The Companion chatbot is your go-to source for light-hearted interaction, always ready to share a joke or offer engaging conversation for those moments when you just need a bit of company.");
 });
 
-document.getElementById("translatorBtnInfo").addEventListener("click", function () {
+document.getElementById("translatorBtnInfo").addEventListener("click", function (event) {
+    event.stopPropagation()
     showExplanation("translatorBtn", "Translator", "Push this button if you want to go to the translator.The translator tool enhances communication by converting conversations between different languages, making interactions between patients and nurses more efficient and clear.");
 });
