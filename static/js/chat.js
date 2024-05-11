@@ -1,12 +1,9 @@
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
-let companion = document.getElementById("companion")
-let translator = document.getElementById("translator")
 let emergency = document.getElementById("emergency")
+let homescreen = document.getElementById("homescreen")
 
 
-//companion.addEventListener("click", openCompanion)
-translator.addEventListener("click", openTranslator)
 //emergency.addEventListener("click", )
 
 var url = new URL(window.location.href);
@@ -21,6 +18,18 @@ sendButton.addEventListener('click', function () {
         messageInput.value = ''; // Clear input field after sending
     }
 });
+
+homescreen.addEventListener("click", function () {
+    navigateTo("home")
+});
+function navigateTo(link) {
+    var currentUrl = window.location.href;
+    var urlParts = currentUrl.split('/');
+    urlParts[urlParts.length - 1] = link;
+    var newUrl = urlParts.join('/');
+    window.location.href = newUrl + `?patientid=${patientId}`;
+}
+
 
 function sendMessage(message) {
     fetch('/patients/chat', {
@@ -51,14 +60,10 @@ function createMessage(sender, message) {
     chatBody.appendChild(botMessageCard);
 }
 
-function openCompanion() {
-    var currentUrl = window.location.href; // Get the current URL
-    var urlParts = currentUrl.split('/'); // Split the URL into parts
-    urlParts[urlParts.length - 1] = 'companion.html'; // Replace the last part
-    var newUrl = urlParts.join('/'); // Rejoin the URL parts
-    window.location.href = newUrl; // Navigate to the new URL
-}
 
+<<<<<<< HEAD
+
+=======
 function openTranslator() {
     var currentUrl = window.location.href; // Get the current URL
     var urlParts = currentUrl.split('/'); // Split the URL into parts
@@ -66,3 +71,4 @@ function openTranslator() {
     var newUrl = urlParts.join('/'); // Rejoin the URL parts
     window.location.href = newUrl; // Navigate to the new URL
 }
+>>>>>>> main

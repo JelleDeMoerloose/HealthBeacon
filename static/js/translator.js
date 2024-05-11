@@ -4,17 +4,29 @@ let fromlanguage = document.getElementById("fromlanguage")
 let tolanguage = document.getElementById("tolanguage")
 let button = document.getElementById("translate")
 let clear_ = document.getElementById("clear")
-let returnChatbot_ = document.getElementById("returnChatbot")
-
+let homescreen = document.getElementById("homescreen")
+var url = new URL(window.location.href);
+var patientId = Number(url.searchParams.get('patientid'));
 initiateCountries()
 clear_.addEventListener("click", clear)
-returnChatbot_.addEventListener("click", returnChatbot)
 button.addEventListener("click", function () {
     let text = input.value.trim()
     let from = fromlanguage.value
     let to = tolanguage.value
     translate(text, from, to)
 })
+
+homescreen.addEventListener("click", function () {
+    navigateTo("home")
+});
+
+function navigateTo(link) {
+    var currentUrl = window.location.href;
+    var urlParts = currentUrl.split('/');
+    urlParts[urlParts.length - 1] = link;
+    var newUrl = urlParts.join('/');
+    window.location.href = newUrl + `?patientid=${patientId}`;
+}
 
 function translate(text, from, to) {
 
@@ -42,7 +54,7 @@ function clear() {
     input.value = ""
     output.value = ""
     input.placeholder = "Enter text to translate"
-    output.placeholder="Translated text will appear here"
+    output.placeholder = "Translated text will appear here"
 }
 
 function returnChatbot() {

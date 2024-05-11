@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/images/logo.png" type="image/x-icon">
+    <title>Patient Homescreen</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/homescreen.css">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js">
+    </script>
+    <script defer src="/static/js/homescreen.js"></script>
+</head>
+
+<body>
+
+    <div class="background-blur"></div>
+    <div id="MyModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modaltitle" class="modal-title">Modal title</h5>
+                </div>
+                <div class="modal-body">
+                    <p id="modaltext">Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row" id="chatbotimagebox"> <img id="chatbotimage" src="/static/images/chatbot4.png"
+                        alt="Chatbot Image" class="img-fluid chatbot-image"></div>
+                <div class="row justify-content-center">
+                    <button id="chatbotBtn" class="button sidebutton">Have a question that's not an emergency? Ask
+                        our chatbot. Our
+                        chatbot is
+                        here to assist with non-urgent inquiries and provide helpful information. It can send a nurse
+                        over if it decides one is needed.</button>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row justify-content-center">
+                    <button id="translatorBtn" class="button sidebutton">
+                        <div class="labelbutton">Translator</div> <img id="translatorBtnInfo" class="infobutton"
+                            src="/static/images/infoemblem.png" alt="info">
+                    </button>
+                </div>
+                <div class="row justify-content-center">
+                    <button id="scheduleBtn" class="button sidebutton">
+                        <div class="labelbutton">Schedule</div> <img id="scheduleBtnInfo" class="infobutton"
+                            src="/static/images/infoemblem.png" alt="info">
+                    </button>
+                </div>
+                <div class="row justify-content-center">
+                    <button id="fooddrinkBtn" class="button sidebutton">
+                        <div class="labelbutton">Food&Drinks</div> <img id="fooddrinkBtnInfo" class="infobutton"
+                            src="/static/images/infoemblem.png" alt="info">
+                    </button>
+                </div>
+                <div class="row justify-content-center">
+                    <button id="companionBtn" class="button sidebutton">
+                        <div class="labelbutton">Companion</div> <img id="companionBtnInfo" class="infobutton"
+                            src="/static/images/infoemblem.png" alt="info">
+                    </button>
+                </div>
+                <div class="row justify-content-center">
+                    <button id="bathroomBtn" class="button sidebutton">
+                        <div class="labelbutton">Bathroom</div> <img id="bathroomBtnInfo" class="infobutton"
+                            src="/static/images/infoemblem.png" alt="info">
+                    </button>
+                </div>
+            </div>
+            <!-- <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Translator</h5>
+                        <button id="translatorBtnInfo" class="Xbtninfo button w-100 h-100">Info</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Day Schedule</h5>
+                        <button id="scheduleBtnInfo" class="Xbtninfo button w-100 h-100">Info</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Food or Drinks</h5>
+                        <button id="fooddrinkBtnInfo" class="Xbtninfo button w-100 h-100">Info</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Chatbot</h5>
+                        <button id="chatbotBtn" class="button w-100 h-100">Chatbot Action</button>
+                        <button id="chatbotBtnInfo" class="Xbtninfo button w-100 h-100">Info</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bathroom</h5>
+                        <button id="bathroomBtn" class="button w-100 h-100">Bathroom Action</button>
+                        <button id="bathroomBtnInfo" class="Xbtninfo button w-100 h-100">Info</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Companion</h5>
+                        <button id="companionBtn" class="button w-100 h-100">Companion Action</button>
+                        <button id="companionBtnInfo" class="Xbtninfo button w-100 h-100">Info</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Emergency</h5>
+                        <button id="emergencyBtn" class="buttonred w-100 h-100">Emergency Action</button>
+                        <button id="emergencyBtnInfo" class="Xbtninfo buttonred w-100 h-100">Info</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="row justify-content-center">
+            <button id="emergencyBtn" class="sidebutton text-center"> Emergency</button>
+
+        </div>
+
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <p>Your request will be forwarded to nursing staff.</p>
+        </div>
+    </div>
+</body>
+
+</html>
