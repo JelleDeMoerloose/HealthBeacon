@@ -29,7 +29,7 @@ configureBtn.addEventListener('click', function () {
                     errorMessage.textContent = `Patient ID ${patientId} doesn't exist`
                 } else {
                     searchInput.style.border = '1px solid green';
-                    window.location.href = `/chat?patientid=${patientId}`;
+                    window.location.href = `/home?patientid=${patientId}`;
                 }
             }).catch(err => { console.error(err.message) })
 
