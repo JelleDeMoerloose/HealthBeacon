@@ -1,0 +1,41 @@
+body {
+  background-color: #FAFAFA; /* Specify your desired background color */
+}
+
+.dashboard-element {
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.charts-row1 {
+    max-width: 90%; /* Adjust max-width to your preference */
+    margin: 0 auto; /* Center the container horizontally */
+    margin-top:20px;
+  }
+
+#container-icons {
+
+    margin-top:15px;
+
+}
+#piechart-1{
+    margin-left:50px;
+    background-color:white;
+   
+}
+
+#piechart-1-text{
+    padding-top:20px;
+    padding-left:15px;
+}
+
+#linegraph-1{
+    background-color:white;
+}
+
+#linegraph-1-text{
+    padding-top:20px;
+    padding-left:15px;
+}
