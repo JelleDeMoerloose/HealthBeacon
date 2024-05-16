@@ -32,6 +32,7 @@ class Coordinator:
         chat: ChatMessage = ChatMessage(query, id, nurse.id)  # timestamp is default
         antwoord = self.chatbot.final_result(query, patient)
         # implement notifications to nurses and dashboarding
+        print(antwoord)
 
         return antwoord["result"]
 
