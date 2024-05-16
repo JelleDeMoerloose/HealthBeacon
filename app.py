@@ -5,9 +5,11 @@ from api.staffAPI import staffAPI
 from api.dashboardAPI import dashboardAPI
 from flask_cors import CORS
 
+from extensions import app
+from extensions import socketio
 
-app = Flask(__name__)
-socketio = SocketIO(app)
+
+
 CORS(app)
 
 # Dictionary to store nurse IDs and corresponding sockets
@@ -48,6 +50,10 @@ def dashboard():
     return send_from_directory("static", "dashboard2.html")
 
 
+@app.route("/websocket")
+def websocket():
+    return send_from_directory("static", "websocket.html")
+
 app.register_blueprint(patientsAPI)
 app.register_blueprint(staffAPI)
 app.register_blueprint(dashboardAPI)
@@ -69,12 +75,10 @@ def handle_new_question():
         socketio.emit("new_question", data["question"])
     return jsonify({"message": "succesfully notified a nurse"})
 
-
+"""
 @socketio.on("connect", namespace="/websocket")  # Specify the namespace
 def handle_connect():
-    nurse_id = request.args.get("nurse_id")
-    nurse_sockets[nurse_id] = request.sid
-    print(f"Nurse {nurse_id} connected")
+    print(f"Nurse connected")
 
 
 @socketio.on("disconnect", namespace="/websocket")  # Specify the namespace
@@ -85,16 +89,13 @@ def handle_disconnect():
 
 
 
-# Example event for sending notifications
-def send_notification(nurse_id, message):
-    if nurse_id in nurse_sockets:
-        socketio.emit(
-            "notification",
-            {"message": message},
-            room=nurse_sockets[nurse_id],
-            namespace="/websocket",
-        )  # Specify the namespace
-"""
 
+
+"""
 if __name__ == "__main__":
     socketio.run(app, use_reloader=True, log_output=True)
+    print("test")
+
+"""
+socketio.run(app, use_reloader=True, log_output=True)
+print("test")
