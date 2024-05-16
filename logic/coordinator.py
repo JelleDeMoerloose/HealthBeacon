@@ -5,6 +5,8 @@ from logic.nurse import Nurse
 from logic.translator import ITranslator
 from logic.chatmessage import ChatMessage
 from model import IChatBot
+import json
+from datetime import datetime
 
 
 class Coordinator:
@@ -21,6 +23,8 @@ class Coordinator:
         self.nurse_selector = nurse_select
         self.translator = translator
 
+        self.emergency_timestamps = []
+
     def question_asked(self, query: str, id: int) -> str:
 
         patient: Patient | None = self.context.get_patient_by(id)
@@ -29,12 +33,25 @@ class Coordinator:
 
         nurse: Nurse = self.nurse_selector.select_nurse(id)
         print(f"Nurse with id {nurse.id} choosen to handle request")
-        chat: ChatMessage = ChatMessage(query, id, nurse.id)  # timestamp is default
         antwoord = self.chatbot.final_result(query, patient)
+        fake_json = antwoord["result"]
+        python_dict = json.loads(fake_json)
+        category = 0  # 0= no assistance needed, 1= help is needed , 2= emergency
+        help_bool: bool = bool(python_dict["help"])
+        emergency_bool: bool = bool(python_dict["emergency"])
+        if emergency_bool:
+            category = 2
+        elif help_bool:
+            category = 1
+        chat: ChatMessage = ChatMessage(
+            query, id, nurse.id, category
+        )  # timestamp is default
         # implement notifications to nurses and dashboarding
         print(antwoord)
 
-        return antwoord["result"]
+        self.context.add_chat_message(chat)
+        print(chat)
+        return python_dict["simple_answer"]
 
     def all_known_languages(self) -> dict[str, str]:
         return self.translator.all_languages()
@@ -47,3 +64,13 @@ class Coordinator:
         if patient:
             return True
         return False
+
+    def add_emergency(self):
+
+        now = datetime.now()
+
+        self.emergency_timestamps.append(now)
+
+    def get_emergencies(self):
+
+        return self.emergency_timestamps

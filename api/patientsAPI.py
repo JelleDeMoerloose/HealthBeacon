@@ -56,3 +56,11 @@ def patient_exists_with(id):
         return jsonify({"exists": True}), 200
     else:
         return jsonify({"exists": False}), 200
+
+
+@patientsAPI.route("/emergency", methods=["POST"])
+def emergency():
+
+    coordinator.add_emergency()
+
+    return jsonify({'message': 'Emergency sent successfully'}), 200

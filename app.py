@@ -2,6 +2,7 @@ from flask import Flask, send_from_directory, request, jsonify
 from flask_socketio import SocketIO, emit
 from api.patientsAPI import patientsAPI
 from api.staffAPI import staffAPI
+from api.dashboardAPI import dashboardAPI
 from flask_cors import CORS
 
 
@@ -42,9 +43,14 @@ def nurse():
 def translator():
     return send_from_directory("static", "translator.html")
 
+@app.route("/dashboard")
+def dashboard():
+    return send_from_directory("static", "dashboard2.html")
+
 
 app.register_blueprint(patientsAPI)
 app.register_blueprint(staffAPI)
+app.register_blueprint(dashboardAPI)
 
 
 @app.route("/")
