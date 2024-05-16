@@ -4,6 +4,7 @@ from logic.patient import Patient
 from logic.nurse import Nurse
 from logic.chatmessage import ChatMessage
 from abc import ABC, abstractmethod
+from logic.emergency import Emergency
 
 
 class IContext(ABC):
@@ -36,6 +37,14 @@ class IContext(ABC):
         pass
 
     @abstractmethod
+    def add_emergency(self, emergency: Emergency):
+        pass
+
+    @abstractmethod
+    def get_emergency_timestamps(self) -> list:
+        pass
+
+    @abstractmethod
     def get_chat_history_patient(self, patient_id: int) -> list[ChatMessage]:
         pass
 
@@ -51,6 +60,7 @@ class HardcodedContext(IContext):
         self.patient_dict: dict[int, Patient] = {}
         self.nurses_dict: dict[int, Nurse] = {}
         self.messages: list[ChatMessage] = []
+        self.emergencies: list[Emergency] = []
         with open(self.DATA_PATH, "r") as f:
             data = json.load(f)
 
@@ -104,3 +114,12 @@ class HardcodedContext(IContext):
             lambda message: message.nurse_id == nurse_id, self.messages
         )
         return list(filtered_messages)
+
+    def add_emergency(self, emergency: Emergency):
+        self.emergencies.append(emergency)
+
+    def get_emergency_timestamps(self) -> list:
+        timestamps = []
+        for emergency in self.emergencies:
+            timestamps.append(emergency.timestamp)
+        return timestamps

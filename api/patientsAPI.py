@@ -58,9 +58,11 @@ def patient_exists_with(id):
         return jsonify({"exists": False}), 200
 
 
-@patientsAPI.route("/emergency", methods=["POST"])
-def emergency():
+@patientsAPI.route("/emergency/<int:id>", methods=["POST"])
+def emergency(id: int):
+    if coordinator.patient_exists_by(id):
+        coordinator.add_emergency(id)
+    else:
+        return "Patient not found", 404
 
-    coordinator.add_emergency()
-
-    return jsonify({'message': 'Emergency sent successfully'}), 200
+    return jsonify({"message": "Emergency sent successfully"}), 200
