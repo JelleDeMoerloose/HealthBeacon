@@ -135,11 +135,10 @@ Patient information: {patient_context}
                 user_message=user_message,
             )
 
-            # print("Custom prompt template: ", self.custom_prompt_template)
-
             # Build new chain with correct patient context
             self.chain = self.qa_bot()
 
+        # print("Custom prompt template: ", self.custom_prompt_template)
         # print("Query: ", query)
 
         response = self.chain.invoke({"query": query})
