@@ -6,6 +6,7 @@ from logic.translator import ITranslator
 from logic.chatmessage import ChatMessage
 from model import IChatBot
 import json
+from datetime import datetime
 
 
 class Coordinator:
@@ -21,6 +22,8 @@ class Coordinator:
         self.chatbot = chatbot
         self.nurse_selector = nurse_select
         self.translator = translator
+
+        self.emergency_timestamps = []
 
     def question_asked(self, query: str, id: int) -> str:
 
@@ -60,3 +63,13 @@ class Coordinator:
         if patient:
             return True
         return False
+
+    def add_emergency(self):
+
+        now = datetime.now()
+
+        self.emergency_timestamps.append(now)
+
+    def get_emergencies(self):
+
+        return self.emergency_timestamps

@@ -16,11 +16,11 @@ sendButton.addEventListener('click', function () {
 });
 
 function returnChatbot() {
-    navigateTo("home")
+    navigateTo("chat")
 }
 
 homescreen.addEventListener("click", function () {
-    navigateTo("chat")
+    navigateTo("home")
 });
 function navigateTo(link) {
     var currentUrl = window.location.href;
