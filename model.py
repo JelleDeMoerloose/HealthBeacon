@@ -20,36 +20,34 @@ class ChatBotV1(IChatBot):
     def __init__(
         self,
         prompt_files=os.path.normpath(
-            os.path.join(os.path.dirname(__file__), "data", "prompts", "default")
+            os.path.join(os.path.dirname(__file__),
+                         "data", "prompts", "default")
         ),
     ):
-        # Initialize attributes to None
-
         # Vectorstore database path for storing the embeddings of the hospital protocol
         self.DB_FAISS_PATH = "vectorstore/db_faiss"
 
         # Custom prompt template for QA retrieval
-        system_prompt = open(
-            os.path.join(prompt_files, "system_prompt.txt"), "r"
-        ).read()
-        examples = open(os.path.join(prompt_files, "examples.txt"), "r").read()
-        user_message = open(os.path.join(prompt_files, "user_message.txt"), "r").read()
-        self.custom_prompt_template = """<s>[INST] <<SYS>>
+        self.custom_prompt_template = None
+        self.custom_prompt_template_unformatted = """<s>[INST] <<SYS>>
 {system_prompt}
 <</SYS>>
 Example questions:
 {examples}
 User message:
+Patient information: {patient_context}
 {user_message}
-[/INST]""".format(
-            system_prompt=system_prompt,
-            # examples='<s>[INST]',
-            examples=examples,
-            user_message=user_message,
-        )
+[/INST]"""
+
+
+        # Prompt file path
+        self.prompt_files = prompt_files
+
+        # Patient id
+        self.patient_id = None
 
         # Load the QA model
-        self.chain = self.qa_bot()
+        self.chain = None
 
     def set_custom_prompt(self):
         """
@@ -79,16 +77,17 @@ User message:
 
         config = {
             "max_new_tokens": 256,
-            "temperature": 0.2,
+            "temperature": 0,
             # "n_gpu_layers": -1,   # 'n_gpu_layers' is an invalid keyword argument for from_pretrained()
             "context_length": 4096,
             # verbose:True,
         }
 
         llm = CTransformers(
-             model="model/llama-2-7b-chat.Q8_0.gguf",
-            # model="model/llama-2-7b-chat.Q5_K_M.gguf",  # faster, download from https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q5_K_M.gguf
-            #model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
+            # model="model/llama-2-7b-chat.Q8_0.gguf",
+            # faster, download from https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q5_K_M.gguf
+            model="model/llama-2-7b-chat.Q5_K_M.gguf",
+            # model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
             model_type="llama",
             config=config,
         )
@@ -114,10 +113,36 @@ User message:
         return qa
 
     # output function
+
     def final_result(self, query: str, patient: Patient) -> dict[str, str]:
-        # we must use the context of the patien !!! NOT IMPLEMENTED YET
-        context: str = str(patient)
+        # print("Patient: ", patient)
+
+        if self.patient_id != patient.id or self.chain is None:
+            # Update patient id
+            self.patient_id = patient.id
+
+            # Custom prompt template for QA retrieval
+            system_prompt = open(os.path.join(
+                self.prompt_files, "system_prompt.txt"), "r").read()
+            examples = open(os.path.join(
+                self.prompt_files, "examples.txt"), "r").read()
+            user_message = open(os.path.join(
+                self.prompt_files, "user_message.txt"), "r").read()
+            self.custom_prompt_template = self.custom_prompt_template_unformatted.format(
+                system_prompt=system_prompt,
+                patient_context=str(patient),
+                examples=examples,
+                user_message=user_message,
+            )
+
+            # Build new chain with correct patient context
+            self.chain = self.qa_bot()
+
+        # print("Custom prompt template: ", self.custom_prompt_template)
+        # print("Query: ", query)
 
         response = self.chain.invoke({"query": query})
-        # print(response)
+
+        # print("Response: ", response)
+
         return response

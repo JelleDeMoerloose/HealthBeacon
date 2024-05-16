@@ -38,6 +38,16 @@ function sendMessage(message) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ query: message, id: patientId })
+    // }).then(response => {
+    //     if (response.ok) {
+    //         return response.json();
+    //     } else {
+    //         response.text()
+    //             .then(text => {
+    //                 console.error(text);
+    //                 createMessage("bot", "Sorry, I am not able to help you with that. Please try again.");
+    //             });
+    //     }
     })
         .then(response => response.json())
         .then(data => {
