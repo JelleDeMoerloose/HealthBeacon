@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, request
 
 import json
 from extensions import coordinator
+from extensions import send_notification
 
 # import sys
 # sys.path.append("..")
@@ -58,9 +59,21 @@ def patient_exists_with(id):
         return jsonify({"exists": False}), 200
 
 
-@patientsAPI.route("/emergency", methods=["POST"])
-def emergency():
+@patientsAPI.route("/emergency/<int:id>", methods=["POST"])
+def emergency(id: int):
+    if coordinator.patient_exists_by(id):
+        coordinator.add_emergency(id)
+    else:
+        return "Patient not found", 404
 
+<<<<<<< HEAD
+    return jsonify({"message": "Emergency sent successfully"}), 200
+=======
     coordinator.add_emergency()
 
+    send_notification("1", "3")
+
+
+
     return jsonify({'message': 'Emergency sent successfully'}), 200
+>>>>>>> 64e9745688cc8c555a43519b8bc5cf2af829efc9

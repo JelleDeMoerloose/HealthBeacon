@@ -4,6 +4,7 @@ from logic.patient import Patient
 from logic.nurse import Nurse
 from logic.translator import ITranslator
 from logic.chatmessage import ChatMessage
+from logic.emergency import Emergency
 from model import IChatBot
 import json
 from datetime import datetime
@@ -33,6 +34,12 @@ class Coordinator:
 
         nurse: Nurse = self.nurse_selector.select_nurse(id)
         print(f"Nurse with id {nurse.id} choosen to handle request")
+        chat: ChatMessage = ChatMessage(query, id, nurse.id)  # timestamp is default
+
+        # TODO: send to nurse and dashboard
+
+        ###
+
         antwoord = self.chatbot.final_result(query, patient)
         fake_json = antwoord["result"]
         python_dict = json.loads(fake_json)
@@ -40,17 +47,21 @@ class Coordinator:
         help_bool: bool = bool(python_dict["help"])
         emergency_bool: bool = bool(python_dict["emergency"])
         if emergency_bool:
+            emergency: Emergency = Emergency(
+                id, self.nurse_selector.select_nurse(id), False
+            )
+            self.context.add_emergency(emergency)
             category = 2
         elif help_bool:
             category = 1
-        chat: ChatMessage = ChatMessage(
-            query, id, nurse.id, category
-        )  # timestamp is default
-        # implement notifications to nurses and dashboarding
-        print(antwoord)
 
+        chat.category = category
+        # TODO: Send to nurse again with category
+
+        ###
+        chat.set_answer(python_dict["simple_answer"])
         self.context.add_chat_message(chat)
-        print(chat)
+
         return python_dict["simple_answer"]
 
     def all_known_languages(self) -> dict[str, str]:
@@ -65,12 +76,13 @@ class Coordinator:
             return True
         return False
 
-    def add_emergency(self):
+    def add_emergency(self, id: int):
 
-        now = datetime.now()
-
-        self.emergency_timestamps.append(now)
+        emergency: Emergency = Emergency(
+            id, self.nurse_selector.select_nurse(id), False
+        )
+        self.context.add_emergency(emergency)
 
     def get_emergencies(self):
 
-        return self.emergency_timestamps
+        return self.context.get_emergency_timestamps()
