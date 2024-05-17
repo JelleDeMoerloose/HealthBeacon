@@ -1,5 +1,5 @@
 I really want to leave my room, but I am not sure if I am allowed to. Can I leave my room? [/INST]
-{{"answer": "Yes, you may leave your room to walk around the hospital at any time.", "help": [false], "emergency": [false]}},
+{{"answer": "Yes, you may leave your room to walk around the hospital at any time.", "help": false, "emergency": false}},
 </s>
 
 <s>[INST] My head hurts and I need some fresh air. Can I go outside? [/INST]
