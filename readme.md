@@ -8,7 +8,7 @@ To update local requirements.txt file with local environment packages:
 ### Copyright
 
 This application was developed as part of the **Excellence Program: Innovation for Society (Good Health and Well-Being)**.
-Contributors to this project include
+Contributors to this project include:
 - Ayko Chevaillier
 - Jelle De Moerloose
 - Sanjog Singh
