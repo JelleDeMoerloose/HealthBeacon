@@ -76,12 +76,21 @@ class Coordinator:
             return True
         return False
 
+    def nurse_exists_by(self, id: int) -> bool:
+        nurse: Nurse | None = self.context.get_nurse_by(id)
+        if nurse:
+            return True
+        return False
+
     def add_emergency(self, id: int):
 
         emergency: Emergency = Emergency(
-            id, self.nurse_selector.select_nurse(id), False
+            id, self.nurse_selector.select_nurse(id).id, False
         )
         self.context.add_emergency(emergency)
+
+    def get_emergencies_nurse(self, id):
+        return self.context.get_emergency_history_nurse(id)
 
     def get_emergencies(self):
 

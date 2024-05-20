@@ -9,7 +9,6 @@ from extensions import app
 from extensions import socketio
 
 
-
 CORS(app)
 
 # Dictionary to store nurse IDs and corresponding sockets
@@ -45,17 +44,17 @@ def nurse():
 def translator():
     return send_from_directory("static", "translator.html")
 
+
 @app.route("/dashboard")
 def dashboard():
     return send_from_directory("static", "dashboard2.html")
 
 
-@app.route("/websocket")
-def websocket():
-    return send_from_directory("static", "websocket.html")
+
+
 
 app.register_blueprint(patientsAPI)
-app.register_blueprint(staffAPI)
+# app.register_blueprint(staffAPI)
 app.register_blueprint(dashboardAPI)
 
 
@@ -76,19 +75,16 @@ def handle_new_question():
     return jsonify({"message": "succesfully notified a nurse"})
 
 """
-@socketio.on("connect", namespace="/websocket")  # Specify the namespace
+
+
+@socketio.on("connect")
 def handle_connect():
     print(f"Nurse connected")
 
 
-@socketio.on("disconnect", namespace="/websocket")  # Specify the namespace
+@socketio.on("disconnect")
 def handle_disconnect():
-    nurse_id = request.args.get("nurse_id")
-    del nurse_sockets[nurse_id]
-    print(f"Nurse {nurse_id} disconnected")
-
-
-
+    print(f"Nurse disconnected")
 
 
 """

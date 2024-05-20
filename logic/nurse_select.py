@@ -23,4 +23,4 @@ class HardcodedNurseSelect(INurseSelect):
         # we will not use patient_id as our way of selecting nurses wont use any context just random
         nurses = self.context.get_all_nurses()
 
-        return nurses[random.randint(0, len(nurses))]
+        return nurses[random.randint(0, len(nurses) - 1)]

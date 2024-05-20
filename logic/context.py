@@ -52,11 +52,20 @@ class IContext(ABC):
     def get_chat_history_nurse(self, nurse_id: int) -> list[ChatMessage]:
         pass
 
+    @abstractmethod
+    def get_emergency_history_nurse(self, nurse_id) -> list[Emergency]:
+        pass
+
+    @abstractmethod
+    def get_emergency_history_patient(self, patient_id) -> list[Emergency]:
+        pass
+
 
 class HardcodedContext(IContext):
     DATA_PATH = "data/patients.json"
 
-    def __init__(self):
+    def __init__(self, socket):
+        self.socket = socket
         self.patient_dict: dict[int, Patient] = {}
         self.nurses_dict: dict[int, Nurse] = {}
         self.messages: list[ChatMessage] = []
@@ -99,6 +108,10 @@ class HardcodedContext(IContext):
         return list(self.nurses_dict.values())
 
     def add_chat_message(self, chatmessage: ChatMessage):
+        self.socket.emit(
+            "notification",
+            {"message": chatmessage.toJSON(), "chatmessage": False},
+        )
         self.messages.append(chatmessage)
 
     def get_chat_history_patient(self, patient_id: int) -> list[ChatMessage]:
@@ -116,7 +129,23 @@ class HardcodedContext(IContext):
         return list(filtered_messages)
 
     def add_emergency(self, emergency: Emergency):
+        self.socket.emit(
+            "notification",
+            {"message": emergency.toJSON(), "chatmessage": False},
+        )
         self.emergencies.append(emergency)
+
+    def get_emergency_history_nurse(self, nurse_id) -> list[Emergency]:
+        filtered_messages = filter(
+            lambda message: message.nurseID == nurse_id, self.emergencies
+        )
+        return list(filtered_messages)
+
+    def get_emergency_history_patient(self, patient_id) -> list[Emergency]:
+        filtered_messages = filter(
+            lambda message: message.patientID == patient_id, self.emergencies
+        )
+        return list(filtered_messages)
 
     def get_emergency_timestamps(self) -> list:
         timestamps = []

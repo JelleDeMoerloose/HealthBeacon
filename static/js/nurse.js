@@ -1,41 +1,58 @@
-document.addEventListener('DOMContentLoaded', function() {
+var url = new URL(window.location.href);
+var nurseId = Number(url.searchParams.get('nurseid'));
+var socket = io();
+loadAll()
 
-function makeRequest() {
-    fetch('/nurse/notifications/latest')
-        .then(response => {
-            // Handle response
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if(data.question){
-                alert(`New question from patient ${data.patientId}: ${data.question}`);
-                fetchNotifications()
-            }
-        })
-        .catch(error => {
-            // Handle error
-            console.error('There was a problem with the fetch operation:', error);
-        });
+function loadAll() {
+    loadAllEmergencies()
 }
 
-function fetchNotifications() {
-    fetch('/nurse/notifications/all')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Process notifications and display them
-            displayNotifications(data);
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
+function loadAllEmergencies() {
+
+}
+
+socket.on('connect', function () {
+    socket.emit('my event', { data: 'I\'m connected!' });
+});
+
+
+socket.on('notification', function (data) {
+    console.log('Received message from server: ', data);
+    message = JSON.parse(data.message)
+    if (nurseId == message.nurseID) {
+        console.log("message for me")
+        if (!data.chatmessage && message.nurseID == nurseId) {
+            console.log("emergency")
+            makeEmergency(message)
+        }
+    }
+});
+function makeEmergency(message) {
+    let element = createNotificationCard(message)
+    let list = document.getElementById("emergencyList")
+    list.insertBefore(element, list.children[0])
+}
+function createNotificationCard(emergency) {
+    // Create card element
+    const card = document.createElement('div');
+    card.classList.add('card', 'notification-card', "emergency-card");
+
+    // Create card body
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    // Add content to card body
+    const content = `
+      <h5 class="card-title">Emergency Notification</h5>
+      <p class="card-text">Patient ID: ${emergency.patientID}</p>
+      <p class="card-text">Timestamp: ${emergency.timestamp}</p>
+    `;
+    cardBody.innerHTML = content;
+
+    // Append card body to card
+    card.appendChild(cardBody);
+
+    return card;
 }
 
 
@@ -75,15 +92,4 @@ function displayNotifications(notifications) {
     }
 }
 
-fetchNotifications();
 
-
-// Make the initial request
-makeRequest();
-
-
-
-// Make a request every 5 seconds
-setInterval(makeRequest, 1000);
-
-});

@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 
 
 class ChatMessage:
@@ -29,13 +30,14 @@ class ChatMessage:
     def __str__(self):
         return f"Question: {self.question}\nPatient ID: {self.patient_id}\nNurse ID: {self.nurse_id}\nCategory: {self.category}\nTimestamp: {self.timestamp}\nValue: {self.val}"
 
-    def serialize(self):
-        return {
+    def toJSON(self):
+        obj = {
             "question": self.question,
             "patient_id": self.patient_id,
             "nurse_id": self.nurse_id,
             "category": self.category,
-            "timestamp": self.timestamp,
+            "timestamp": self.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
             "answered": self.answered,
             "value": self.val,
         }
+        return json.dumps(obj)
