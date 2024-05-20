@@ -24,7 +24,8 @@ def get_answer():
             antwoord = coordinator.question_asked(query, id)
             return jsonify({"message": antwoord})
         except Exception as e:
-            return jsonify({"error": str(e)}), 404
+            print(str(e))
+            return jsonify({"error": str(e)}), 501
     else:
         return jsonify({"error": "query and or id not present"}), 400
 
@@ -70,6 +71,4 @@ def emergency(id: int):
 
     send_notification("1", "3")
 
-
-
-    return jsonify({'message': 'Emergency sent successfully'}), 200
+    return jsonify({"message": "Emergency sent successfully"}), 200

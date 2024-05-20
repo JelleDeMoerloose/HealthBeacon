@@ -20,8 +20,7 @@ class ChatBotV1(IChatBot):
     def __init__(
         self,
         prompt_files=os.path.normpath(
-            os.path.join(os.path.dirname(__file__),
-                         "data", "prompts", "default")
+            os.path.join(os.path.dirname(__file__), "data", "prompts", "default")
         ),
     ):
         # Vectorstore database path for storing the embeddings of the hospital protocol
@@ -38,7 +37,6 @@ User message:
 Patient information: {patient_context}
 {user_message}
 [/INST]"""
-
 
         # Prompt file path
         self.prompt_files = prompt_files
@@ -86,8 +84,8 @@ Patient information: {patient_context}
         llm = CTransformers(
             # model="model/llama-2-7b-chat.Q8_0.gguf",
             # faster, download from https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q5_K_M.gguf
-            model="model/llama-2-7b-chat.Q5_K_M.gguf",
-            # model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
+            # model="model/llama-2-7b-chat.Q5_K_M.gguf",
+            model="model/llama-2-7b-chat.ggmlv3.q8_0.bin",
             model_type="llama",
             config=config,
         )
@@ -122,17 +120,20 @@ Patient information: {patient_context}
             self.patient_id = patient.id
 
             # Custom prompt template for QA retrieval
-            system_prompt = open(os.path.join(
-                self.prompt_files, "system_prompt.txt"), "r").read()
-            examples = open(os.path.join(
-                self.prompt_files, "examples.txt"), "r").read()
-            user_message = open(os.path.join(
-                self.prompt_files, "user_message.txt"), "r").read()
-            self.custom_prompt_template = self.custom_prompt_template_unformatted.format(
-                system_prompt=system_prompt,
-                patient_context=str(patient),
-                examples=examples,
-                user_message=user_message,
+            system_prompt = open(
+                os.path.join(self.prompt_files, "system_prompt.txt"), "r"
+            ).read()
+            examples = open(os.path.join(self.prompt_files, "examples.txt"), "r").read()
+            user_message = open(
+                os.path.join(self.prompt_files, "user_message.txt"), "r"
+            ).read()
+            self.custom_prompt_template = (
+                self.custom_prompt_template_unformatted.format(
+                    system_prompt=system_prompt,
+                    patient_context=str(patient),
+                    examples=examples,
+                    user_message=user_message,
+                )
             )
 
             # Build new chain with correct patient context
