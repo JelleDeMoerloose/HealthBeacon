@@ -140,10 +140,10 @@ Patient information: {patient_context}
             self.chain = self.qa_bot()
 
         # print("Custom prompt template: ", self.custom_prompt_template)
-        # print("Query: ", query)
+        print("Query: ", query)
 
         response = self.chain.invoke({"query": query})
 
-        # print("Response: ", response)
+        print("Response: ", response)
 
         return response

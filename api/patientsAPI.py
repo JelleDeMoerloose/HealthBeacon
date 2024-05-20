@@ -67,8 +67,6 @@ def emergency(id: int):
     else:
         return "Patient not found", 404
 
-    coordinator.add_emergency()
-
     send_notification("1", "3")
 
     return jsonify({"message": "Emergency sent successfully"}), 200

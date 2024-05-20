@@ -59,10 +59,10 @@ class Coordinator:
         # TODO: Send to nurse again with category
 
         ###
-        chat.set_answer(python_dict["simple_answer"])
+        chat.set_answer(python_dict["answer"])
         self.context.add_chat_message(chat)
 
-        return python_dict["simple_answer"]
+        return python_dict["answer"]
 
     def all_known_languages(self) -> dict[str, str]:
         return self.translator.all_languages()
