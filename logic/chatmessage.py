@@ -10,13 +10,12 @@ class ChatMessage:
         nurse_id: int,
         category: int = 0,
         answered: bool = False,
-        timestamp=datetime.now(),
     ):
         self.question = question
         self.patient_id = patient_id
         self.nurse_id = nurse_id
         self.category = category
-        self.timestamp = timestamp
+        self.timestamp = datetime.now()
         self.answered = answered
         self.val = None
 
@@ -35,6 +34,7 @@ class ChatMessage:
             "question": self.question,
             "patient_id": self.patient_id,
             "nurse_id": self.nurse_id,
+            "answer": self.answer,
             "category": self.category,
             "timestamp": self.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
             "answered": self.answered,

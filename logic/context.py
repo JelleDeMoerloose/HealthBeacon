@@ -140,13 +140,13 @@ class HardcodedContext(IContext):
 
     def get_emergency_history_nurse(self, nurse_id) -> list[Emergency]:
         filtered_messages = filter(
-            lambda message: message.nurseID == nurse_id, self.emergencies
+            lambda message: message.nurse_id == nurse_id, self.emergencies
         )
         return list(filtered_messages)
 
     def get_emergency_history_patient(self, patient_id) -> list[Emergency]:
         filtered_messages = filter(
-            lambda message: message.patientID == patient_id, self.emergencies
+            lambda message: message.patient_id == patient_id, self.emergencies
         )
         return list(filtered_messages)
 

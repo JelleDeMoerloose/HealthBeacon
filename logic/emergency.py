@@ -3,13 +3,13 @@ import json
 
 
 class Emergency:
-    def __init__(self, patientID, nurseID, button, timestamp=datetime.now()):
-        self.patientID = patientID
-        self.nurseID = nurseID
+    def __init__(self, patientID, nurseID, button):
+        self.patient_id = patientID
+        self.nurse_id = nurseID
         self.button = (
             button  # bool for wether patient clicked on emergency button or not
         )
-        self.timestamp = timestamp
+        self.timestamp = datetime.now()
 
     def __str__(self) -> str:
         return self.toJSON()
@@ -17,8 +17,8 @@ class Emergency:
     def toJSON(self):
         # Create a dictionary of the object's attributes
         emergency_dict = {
-            "patientID": self.patientID,
-            "nurseID": self.nurseID,
+            "patient_id": self.patient_id,
+            "nurse_id": self.nurse_id,
             "button": self.button,
             "timestamp": self.timestamp.strftime(
                 "%Y-%m-%d %H:%M:%S"

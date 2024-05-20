@@ -24,7 +24,7 @@ def getAllEmergencies(nurseID: int):
 def getAllChatMessages(nurseID: int):
     if coordinator.nurse_exists_by(nurseID):
         try:
-            lijst = coordinator.get_emergencies_nurse(nurseID)
+            lijst = coordinator.get_chatmessage_nurse(nurseID)
             return jsonify({"message": lijst}), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 501

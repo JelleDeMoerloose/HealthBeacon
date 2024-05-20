@@ -6,3 +6,11 @@
     background-color: #f8d7da;
     /* Red background color */
 }
+
+.help-card {
+    background-color: #ffc300;
+}
+
+.nohelp-card {
+    background-color: aquamarine;
+}

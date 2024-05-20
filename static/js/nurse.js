@@ -6,6 +6,7 @@ loadAll()
 function loadAll() {
     document.getElementById("nurseid").innerHTML = "Nurse id " + nurseId
     loadAllEmergencies()
+    loadAllChatMessages()
 
 }
 function loadAllChatMessages() {
@@ -19,8 +20,14 @@ function loadAllChatMessages() {
         resp => {
             for (let item of resp.message) {
                 obj = JSON.parse(item)
-                print(obj)
-                //makeChatMessage(obj)
+                let category = obj.category
+                if (category === 2) {
+                    makeEmergency(obj)
+                } else if (category === 1) {
+                    makeHelp(obj)
+                } else {
+                    makeNoHelp(obj)
+                }
             }
         }
     )
@@ -36,9 +43,9 @@ function loadAllEmergencies() {
     }).then(
         resp => {
             for (let item of resp.message) {
-                console.log(item)
+
                 obj = JSON.parse(item)
-                console.log(obj)
+
                 makeEmergency(obj)
             }
         }
@@ -51,35 +58,74 @@ socket.on('connect', function () {
 
 
 socket.on('notification', function (data) {
-    console.log('Received message from server: ', data);
+
+
     message = JSON.parse(data.message)
-    if (nurseId == message.nurseID) {
-        console.log("message for me")
-        if (!data.chatmessage && message.nurseID == nurseId) {
-            console.log("emergency")
+    if (!data.chatmessage && nurseId == message.nurse_id) {
+
+        console.log("emergency")
+        makeEmergency(message)
+
+    } else {
+        //it is a chatmessage: check category
+        let category = message.category
+        if (category === 2) {
             makeEmergency(message)
+        } else if (category === 1) {
+            makeHelp(message)
+        } else {
+            makeNoHelp(message)
         }
+
     }
 });
+
 function makeEmergency(message) {
     let element = createNotificationCard(message)
+    element.classList.add("emergency-card");
     let list = document.getElementById("emergencyList")
+    list.insertBefore(element, list.children[0])
+}
+function makeHelp(message) {
+    let element = createNotificationCard(message)
+    element.classList.add("help-card");
+    let list = document.getElementById("helpList")
+    list.insertBefore(element, list.children[0])
+}
+function makeNoHelp(message) {
+    let element = createNotificationCard(message)
+    element.classList.add("nohelp-card");
+    let list = document.getElementById("nohelpList")
     list.insertBefore(element, list.children[0])
 }
 function createNotificationCard(emergency) {
     // Create card element
     const card = document.createElement('div');
-    card.classList.add('card', 'notification-card', "emergency-card");
+    card.classList.add('card', 'notification-card');
 
     // Create card body
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body');
-
+    let question = "NO CONTEXT"
+    let answer = "BUTTON PRESSED"
+    if (emergency.question) {
+        question = "Q:" + emergency.question
+        answer = "A:" + emergency.answer
+    }
     // Add content to card body
+    let noti = "Notification"
+    if (emergency.category === 2 || emergency.button === true) {
+        noti = "Emergency Notification"
+    } else if (emergency.category === 1) {
+        noti = "Help Needed"
+    } else {
+        noti = "Handled by chatbot"
+    }
     const content = `
-      <h5 class="card-title">Emergency Notification</h5>
-      <p class="card-text">Patient ID: ${emergency.patientID}</p>
-      <p class="card-text">NO CONTEXT->BUTTON</p>
+      <h5 class="card-title">${noti}</h5>
+      <p class="card-text">Patient ID: ${emergency.patient_id}</p>
+      <p class="card-text">${question}</p>
+      <p class="card-text">${answer}</p>
       <p class="card-text">Timestamp: ${emergency.timestamp}</p>
     `;
     cardBody.innerHTML = content;

@@ -1,4 +1,4 @@
 Question: {question}
 Hospital protocol context: {context}
 Output the answer in JSON. Example: {{"answer": answer, "help": help, "emergency": emergency}}
-Output must include only valid JSON and nothing else.
+Output must include only valid JSON and nothing else, no added chars before or after.
