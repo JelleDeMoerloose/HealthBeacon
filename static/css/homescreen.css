@@ -213,3 +213,8 @@ button:focus {
     font-size: 28px;
     font-weight: bold;
 }
+
+
+#chatbotimage {
+    cursor: pointer;
+}

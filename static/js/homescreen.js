@@ -130,3 +130,37 @@ document.getElementById("translatorBtnInfo").addEventListener("click", function 
     event.stopPropagation()
     showExplanation("translatorBtn", "Translator", "Push this button if you want to go to the translator.The translator tool enhances communication by converting conversations between different languages, making interactions between patients and nurses more efficient and clear.");
 });
+
+document.getElementById("chatbotimage").addEventListener("click", function (event) {
+
+    
+
+    let params = new URLSearchParams(window.location.search); // Get the search parameters from the current URL
+    let patientid =  params.get('patientid');
+
+    window.location.href = '/chat?patient='+patientid;
+
+});
+
+document.getElementById("chatbotimage").addEventListener("click", function (event) {
+
+    
+
+    let params = new URLSearchParams(window.location.search); // Get the search parameters from the current URL
+    let patientid =  params.get('patientid');
+
+    window.location.href = '/chat?patient='+patientid;
+
+});
+
+document.getElementById("chatbotimage").addEventListener("click", function (event) {
+
+    
+
+    let params = new URLSearchParams(window.location.search); // Get the search parameters from the current URL
+    let patientid =  params.get('patientid');
+
+    window.location.href = '/chat?patient='+patientid;
+
+});
+
