@@ -4,7 +4,9 @@ var socket = io();
 loadAll()
 
 function loadAll() {
+    document.getElementById("nurseid").innerHTML = "Nurse id " + nurseId
     loadAllEmergencies()
+
 }
 
 function loadAllEmergencies() {
