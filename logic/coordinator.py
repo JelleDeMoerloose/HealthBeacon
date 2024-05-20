@@ -92,8 +92,18 @@ class Coordinator:
         emergencies_str = [str(emergency) for emergency in emergencies]
         return emergencies_str
 
+    def get_all_emergencies(self):
+        emergencies = self.context.get_emergency_history()
+        emergencies_str = [str(emergency) for emergency in emergencies]
+        return emergencies_str
+
     def get_chatmessage_nurse(self, id):
         chatmessages = self.context.get_chat_history_nurse(id)
+        chatmessages_str = [str(chatmessage) for chatmessage in chatmessages]
+        return chatmessages_str
+
+    def get_all_chatmessages(self):
+        chatmessages = self.context.get_chat_history()
         chatmessages_str = [str(chatmessage) for chatmessage in chatmessages]
         return chatmessages_str
 

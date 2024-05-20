@@ -17,7 +17,7 @@ def emergencies_all():
     # Extract the hour component from the current time
     current_hour = now.hour
     hours_until_now = [str(hour) + ":00" for hour in range(current_hour + 1)]
-
+    
     data = [30, 20, 25, 26, 21, 22, 23, 24, 27, 28, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
 
     emergencies = coordinator.get_emergencies()

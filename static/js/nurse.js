@@ -123,7 +123,7 @@ function createNotificationCard(emergency) {
     }
     const content = `
       <h5 class="card-title">${noti}</h5>
-      <p class="card-text">Patient ID: ${emergency.patient_id}</p>
+      <p class="card-text">Patient ID: ${emergency.patient_id} </p>
       <p class="card-text">${question}</p>
       <p class="card-text">${answer}</p>
       <p class="card-text">Timestamp: ${emergency.timestamp}</p>

@@ -60,6 +60,14 @@ class IContext(ABC):
     def get_emergency_history_patient(self, patient_id) -> list[Emergency]:
         pass
 
+    @abstractmethod
+    def get_emergency_history(self) -> list[Emergency]:
+        pass
+
+    @abstractmethod
+    def get_chat_history(self) -> list[ChatMessage]:
+        pass
+
 
 class HardcodedContext(IContext):
     DATA_PATH = "data/patients.json"
@@ -155,3 +163,9 @@ class HardcodedContext(IContext):
         for emergency in self.emergencies:
             timestamps.append(emergency.timestamp)
         return timestamps
+    
+    def get_emergency_history(self) -> list[Emergency]:
+        return self.emergencies
+
+    def get_chat_history(self) -> list[ChatMessage]:
+        return self.messages
