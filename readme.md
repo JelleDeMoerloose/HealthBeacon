@@ -4,11 +4,11 @@ To install correct environment dependencies, execute in the correct environment:
 To update local requirements.txt file with local environment packages:
 **pip freeze > requirements.txt**
 
-You also need to install LLM speciified in model.py (link in there)
+You also need to install the LLM specified in model.py (link in there)
 
 ## Making a chatbot to optimize Nurse calling systems
 features:
-- emergency button notifys nurses in area
+- emergency button notifies nurses in area
 - chat to get help, by nurse or by chatbot (it can determine if you need help)
 - translation to bridge the language barrier between nurse and patient
 - dashboard that shows insights for hospital administration
