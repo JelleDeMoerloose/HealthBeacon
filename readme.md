@@ -1,10 +1,9 @@
 To install correct environment dependencies, execute in the correct environment:
 **pip install -r requirements.txt**
 
-To update local requirements.txt file with local environment packages:
-**pip freeze > requirements.txt**
-
 You also need to install the LLM specified in model.py (link in there)
+
+To start the application, execute `python app.py`
 
 ## Making a chatbot to optimize Nurse calling systems
 features:
