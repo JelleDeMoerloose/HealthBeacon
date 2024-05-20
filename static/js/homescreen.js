@@ -14,6 +14,8 @@ var patientId = Number(url.searchParams.get('patientid'));
 document.addEventListener("DOMContentLoaded", rescale);
 window.addEventListener("resize", rescale)
 
+let emergencyText = document.getElementById("emergencySuccess")
+
 function rescale() {
     var buttons = document.querySelectorAll('.button.sidebutton');
     buttons.forEach(function (button) {
@@ -37,7 +39,32 @@ function rescale() {
     })
 }
 
+emergency.addEventListener('click', function () {
 
+    sendEmergency(patientId)
+    
+    
+});
+
+function sendEmergency(id) {
+    fetch('/patients/emergency/'+id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+
+    })
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log(data.message)
+            if (data.message == "Emergency sent successfully"){
+                emergencyText.innerText = "Emergency sent successfully"
+            }
+
+        })
+        .catch(error => console.error('Error:', error));
+}
 
 schedule.addEventListener("click", openSchedule);
 chatbot.addEventListener("click", openChatbot);

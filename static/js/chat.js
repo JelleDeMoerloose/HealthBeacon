@@ -3,6 +3,8 @@ const sendButton = document.getElementById('sendButton');
 let emergency = document.getElementById("emergency")
 let homescreen = document.getElementById("homescreen")
 
+let emergencyText = document.getElementById("emergencySuccess")
+
 
 //emergency.addEventListener("click", )
 
@@ -19,6 +21,17 @@ sendButton.addEventListener('click', function () {
     }
 });
 
+
+emergency.addEventListener('click', function () {
+
+    sendEmergency(patientId)
+    
+    
+});
+
+
+
+
 homescreen.addEventListener("click", function () {
     navigateTo("home")
 });
@@ -32,6 +45,7 @@ function navigateTo(link) {
 
 
 function sendMessage(message) {
+    console.log("patiendid:"+ patientId)
     fetch('/patients/chat', {
         method: 'POST',
         headers: {
@@ -71,3 +85,23 @@ function createMessage(sender, message) {
 }
 
 
+
+function sendEmergency(id) {
+    fetch('/patients/emergency/'+id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+
+    })
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log(data.message)
+            if (data.message == "Emergency sent successfully"){
+                emergencyText.innerText = "Emergency sent successfully"
+            }
+
+        })
+        .catch(error => console.error('Error:', error));
+}

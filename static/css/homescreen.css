@@ -218,3 +218,12 @@ button:focus {
 #chatbotimage {
     cursor: pointer;
 }
+
+#emergencySuccess{
+    font-weight: bold;
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    text-align: center; 
+    font-size:25px;
+}
