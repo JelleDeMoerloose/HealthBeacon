@@ -2,7 +2,7 @@ from flask import Flask, send_from_directory, request, jsonify
 from flask_socketio import SocketIO, emit
 from api.patientsAPI import patientsAPI
 from api.staffAPI import staffAPI
-from api.dashboardAPI import dashboardAPI
+
 from flask_cors import CORS
 
 from extensions import app
@@ -52,7 +52,7 @@ def dashboard():
 
 app.register_blueprint(patientsAPI)
 app.register_blueprint(staffAPI)
-app.register_blueprint(dashboardAPI)
+
 
 
 @app.route("/")

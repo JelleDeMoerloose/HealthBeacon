@@ -55,8 +55,9 @@ var questionsChart = new Chart(ctx2, {
 //    emergenciesChart.update();
 //  }, 2000);
 
+
 function fetchData() {
-    fetch('http://localhost:5000/dashboard/emergencies/all')
+    fetch('http://localhost:5000/staff/emergencies/dashboard/all')
         .then(response => response.json())
         .then(data => {
 
