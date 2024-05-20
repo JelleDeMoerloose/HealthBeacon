@@ -7,7 +7,7 @@ To update local requirements.txt file with local environment packages:
 
 ### Copyright
 
-This application was developed as part of the **Excellence Program: Innovation for Society (Good Health and Well-Being)**.
+This application was developed as part of the **Excellence Program: Innovation for Society (Good Health and Well-Being)** at Ghent University, Faculty of Engineering and Architecture.
 Contributors to this project include:
 - Ayko Chevaillier
 - Jelle De Moerloose
