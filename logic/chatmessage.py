@@ -28,7 +28,7 @@ class ChatMessage:
         self.val = choosen_category  # used to check if predictions were right
 
     def __str__(self):
-        return f"Question: {self.question}\nPatient ID: {self.patient_id}\nNurse ID: {self.nurse_id}\nCategory: {self.category}\nTimestamp: {self.timestamp}\nValue: {self.val}"
+        return self.toJSON()
 
     def toJSON(self):
         obj = {

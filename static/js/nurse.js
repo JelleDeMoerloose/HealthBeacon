@@ -8,7 +8,22 @@ function loadAll() {
 }
 
 function loadAllEmergencies() {
-
+    fetch(`/staff/emergencies/${nurseId}`).then(resp => {
+        if (!resp.ok) {
+            resp.text().then(err => console.error(err))
+        } else {
+            return resp.json()
+        }
+    }).then(
+        resp => {
+            for (let item of resp.message) {
+                console.log(item)
+                obj = JSON.parse(item)
+                console.log(obj)
+                makeEmergency(obj)
+            }
+        }
+    )
 }
 
 socket.on('connect', function () {

@@ -11,6 +11,9 @@ class Emergency:
         )
         self.timestamp = timestamp
 
+    def __str__(self) -> str:
+        return self.toJSON()
+
     def toJSON(self):
         # Create a dictionary of the object's attributes
         emergency_dict = {

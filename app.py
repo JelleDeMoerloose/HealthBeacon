@@ -50,11 +50,8 @@ def dashboard():
     return send_from_directory("static", "dashboard2.html")
 
 
-
-
-
 app.register_blueprint(patientsAPI)
-# app.register_blueprint(staffAPI)
+app.register_blueprint(staffAPI)
 app.register_blueprint(dashboardAPI)
 
 

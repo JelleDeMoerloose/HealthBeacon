@@ -90,7 +90,9 @@ class Coordinator:
         self.context.add_emergency(emergency)
 
     def get_emergencies_nurse(self, id):
-        return self.context.get_emergency_history_nurse(id)
+        emergencies = self.context.get_emergency_history_nurse(id)
+        emergencies_str = [str(emergency) for emergency in emergencies]
+        return emergencies_str
 
     def get_emergencies(self):
 
