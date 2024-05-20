@@ -110,7 +110,7 @@ class HardcodedContext(IContext):
     def add_chat_message(self, chatmessage: ChatMessage):
         self.socket.emit(
             "notification",
-            {"message": chatmessage.toJSON(), "chatmessage": False},
+            {"message": chatmessage.toJSON(), "chatmessage": True},
         )
         self.messages.append(chatmessage)
 
@@ -129,10 +129,13 @@ class HardcodedContext(IContext):
         return list(filtered_messages)
 
     def add_emergency(self, emergency: Emergency):
-        self.socket.emit(
-            "notification",
-            {"message": emergency.toJSON(), "chatmessage": False},
-        )
+        if (
+            emergency.button
+        ):  # if not by button, its already sent to nurse with chatmessage
+            self.socket.emit(
+                "notification",
+                {"message": emergency.toJSON(), "chatmessage": False},
+            )
         self.emergencies.append(emergency)
 
     def get_emergency_history_nurse(self, nurse_id) -> list[Emergency]:

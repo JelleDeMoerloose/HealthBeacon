@@ -47,9 +47,7 @@ class Coordinator:
         help_bool: bool = bool(python_dict["help"])
         emergency_bool: bool = bool(python_dict["emergency"])
         if emergency_bool:
-            emergency: Emergency = Emergency(
-                id, self.nurse_selector.select_nurse(id), False
-            )
+            emergency: Emergency = Emergency(id, nurse.id, False)
             self.context.add_emergency(emergency)
             category = 2
         elif help_bool:
@@ -85,7 +83,7 @@ class Coordinator:
     def add_emergency(self, id: int):
 
         emergency: Emergency = Emergency(
-            id, self.nurse_selector.select_nurse(id).id, False
+            id, self.nurse_selector.select_nurse(id).id, True
         )
         self.context.add_emergency(emergency)
 
@@ -93,6 +91,11 @@ class Coordinator:
         emergencies = self.context.get_emergency_history_nurse(id)
         emergencies_str = [str(emergency) for emergency in emergencies]
         return emergencies_str
+
+    def get_chatmessage_nurse(self, id):
+        chatmessages = self.context.get_chat_history_nurse(id)
+        chatmessages_str = [str(chatmessage) for chatmessage in chatmessages]
+        return chatmessages_str
 
     def get_emergencies(self):
 

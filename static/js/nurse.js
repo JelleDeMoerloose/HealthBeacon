@@ -8,6 +8,23 @@ function loadAll() {
     loadAllEmergencies()
 
 }
+function loadAllChatMessages() {
+    fetch(`/staff/chatmessages/${nurseId}`).then(resp => {
+        if (!resp.ok) {
+            resp.text().then(err => console.error(err))
+        } else {
+            return resp.json()
+        }
+    }).then(
+        resp => {
+            for (let item of resp.message) {
+                obj = JSON.parse(item)
+                print(obj)
+                //makeChatMessage(obj)
+            }
+        }
+    )
+}
 
 function loadAllEmergencies() {
     fetch(`/staff/emergencies/${nurseId}`).then(resp => {
@@ -62,6 +79,7 @@ function createNotificationCard(emergency) {
     const content = `
       <h5 class="card-title">Emergency Notification</h5>
       <p class="card-text">Patient ID: ${emergency.patientID}</p>
+      <p class="card-text">NO CONTEXT->BUTTON</p>
       <p class="card-text">Timestamp: ${emergency.timestamp}</p>
     `;
     cardBody.innerHTML = content;
