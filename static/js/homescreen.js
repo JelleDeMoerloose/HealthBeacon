@@ -160,7 +160,7 @@ document.getElementById("chatbotimage").addEventListener("click", function (even
     let params = new URLSearchParams(window.location.search); // Get the search parameters from the current URL
     let patientid =  params.get('patientid');
 
-    window.location.href = '/chat?patient='+patientid;
+    window.location.href = '/chat?patientid='+patientid;
 
 });
 
